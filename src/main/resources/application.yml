@@ -1,0 +1,11 @@
+spring:
+  data:
+    neo4j:
+      username:neo4j
+      password:password
+      scope:session
+  datasource:
+    url:jdbc:mariadb://localhost:3306/gtas
+    username:root
+    password:admin
+    platform:mariadb
