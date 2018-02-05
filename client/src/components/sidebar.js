@@ -22,15 +22,15 @@ export class Sidepanel extends Component {
   }
   render() {
     return (
-      <div class="cbp-sidebar sidebar after-header">
-        <form class="filters">
-          <div class="filter-list" role="tablist">
-            <h1 class="filter-heading">Filters
-              <button onClick={()=>this.props.handleSubmit(this.state)} type="button" class="btn btn-icon-only btn-primary">
-                <i class="fa fa-inverse fa-search"></i>
-                <span class="sr-only">Search</span>
+      <div className="cbp-sidebar sidebar after-header">
+        <form className="filters">
+          <div className="filter-list" role="tablist">
+            <h1 className="filter-heading">Filters
+              <button onClick={()=>this.props.handleSubmit(this.state)} type="button" className="btn btn-icon-only btn-primary">
+                <i className="fa fa-inverse fa-search"></i>
+                <span className="sr-only">Search</span>
               </button>
-              <a href="" class="filters-clear">Clear Filters</a>
+              <a href="" className="filters-clear">Clear Filters</a>
             </h1>
             <AccordionPanel check title="Address" value={this.state["Address"]}
               handleChange={(e)=>this.handleChange("Address",e)}>

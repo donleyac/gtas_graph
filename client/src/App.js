@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/navbar.js'
 import {Sidepanel} from './components/sidebar.js';
+import ForceGraph from './components/forceGraph.js';
 import './../node_modules/cbp-theme/dist/cbp-theme.css';
+
 
 class App extends Component {
   constructor(props){
@@ -18,6 +20,7 @@ class App extends Component {
       <span>
         <Navbar />
         <Sidepanel handleSubmit={this.onFormSubmit}/>
+        <ForceGraph />
         <h2>{this.state.search}</h2>
       </span>
     );

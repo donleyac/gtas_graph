@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import {Panel} from 'react-bootstrap'
 import './accordionPanel.css';
 export class AccordionPanel extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
   render() {
     return (
       <div id ="accordionPanel">
@@ -20,7 +17,7 @@ export class AccordionPanel extends Component {
                 :null}
               <Panel.Title toggle={this.props.value.titlecheck}><h2 aria-expanded="true">
                 {this.props.title}
-                <i class="fa fa-angle-right pull-right"></i>
+                <i className="fa fa-angle-right pull-right"></i>
               </h2></Panel.Title>
             </span>
           </Panel.Heading>
