@@ -38,7 +38,7 @@ public class GtasNeoConfiguration extends Neo4jConfiguration{
 
 	 private static final Logger LOG = LoggerFactory.getLogger(GtasNeoConfiguration.class);
 	 private static final String DRIVER_CLASS="org.neo4j.ogm.drivers.http.driver.HttpDriver";
-	 private static final String NEO_URI="http://neo4j:neo4j@localhost:7474";
+	 private static final String NEO_URI="http://neo4j:password@localhost:7474";
 	
 	 @Bean
 	 public org.neo4j.ogm.config.Configuration getConfiguration() {

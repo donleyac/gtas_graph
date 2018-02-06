@@ -1,0 +1,29 @@
+.accordionPanel {
+  .panel-heading {
+    background-color: white !important;
+    padding: 0px;
+    display: flex;
+  }
+  .panel-default {
+    border: 0px;
+  }
+  .panel-title {
+    h2 {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding: 10px 5px;
+      color: #555;
+      font-size: 22px;
+      font-weight: 400;
+    }
+    a:hover  {
+      text-decoration: none;
+    }
+    a:focus {
+      text-decoration: none;
+    }
+  }
+  .checkbox {
+    margin: 20px;
+  }
+}

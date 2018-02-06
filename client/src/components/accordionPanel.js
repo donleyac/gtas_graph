@@ -1,25 +1,24 @@
 import React, {Component} from 'react';
 import {Panel} from 'react-bootstrap'
-import './accordionPanel.css';
+import './accordionPanel.scss';
 export class AccordionPanel extends Component {
   render() {
     return (
-      <div id ="accordionPanel">
+      <div className ="accordionPanel">
         <Panel eventKey="1">
           <Panel.Heading>
-            <span className="check-container">
-              {this.props.check
-                ?(<input type="checkbox"
-                  name="titlecheck"
-                  checked={this.props.value.titlecheck}
-                  onChange={this.props.handleChange}
-                  />)
-                :null}
-              <Panel.Title toggle={this.props.value.titlecheck}><h2 aria-expanded="true">
-                {this.props.title}
-                <i className="fa fa-angle-right pull-right"></i>
-              </h2></Panel.Title>
-            </span>
+            {this.props.check
+              ?(<input type="checkbox"
+                name="titlecheck"
+                className="checkbox"
+                checked={this.props.value.titlecheck}
+                onChange={this.props.handleChange}
+                />)
+              :null}
+            <Panel.Title toggle={this.props.value.titlecheck}><h2 aria-expanded="true">
+              {this.props.title}
+              <i className="fa fa-angle-right pull-right"></i>
+            </h2></Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible>
             {React.Children.map(this.props.children, child=>{

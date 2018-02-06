@@ -1,0 +1,13 @@
+.sidebar-tray {
+  position:absolute;
+  display: flex;
+  align-items: center;
+  -webkit-transition: transform 1s; /* Safari */
+  transition: transform 1s;
+  .sidebar {
+    padding-right: 0px;
+  }
+}
+.sidebar-open {
+  transform: translateX(-350px);
+}

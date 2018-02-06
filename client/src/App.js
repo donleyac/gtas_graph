@@ -4,8 +4,8 @@ import Navbar from './components/navbar.js'
 import {Sidepanel} from './components/sidebar.js';
 import ForceGraph from './components/forceGraph.js';
 import './../node_modules/cbp-theme/dist/cbp-theme.css';
-
-
+import testJson from './test.json';
+import smallTestJson from './smallTest.json';
 class App extends Component {
   constructor(props){
     super(props);
@@ -19,9 +19,11 @@ class App extends Component {
     return (
       <span>
         <Navbar />
-        <Sidepanel handleSubmit={this.onFormSubmit}/>
-        <ForceGraph />
-        <h2>{this.state.search}</h2>
+        <span style={{height: "87vh"}} className="flex">
+          <Sidepanel handleSubmit={this.onFormSubmit}/>
+          <ForceGraph data={smallTestJson}/>
+          <h2>{this.state.search}</h2>
+        </span>
       </span>
     );
   }

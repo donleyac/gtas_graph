@@ -1,0 +1,23 @@
+{
+	"links": [{
+		"source": "1",
+		"target": "0"
+	}, {
+		"source": "2",
+		"target": "0"
+	}],
+	"nodes": [{
+		"title": "QR1021",
+		"label": "flight"
+	}, {
+		"title": "EVE",
+		"label": "passenger",
+    "name": "eve stanton",
+    "gender": "f"
+	}, {
+		"title": "ROTOR",
+		"label": "passenger",
+    "name": "rotor spindel",
+    "gender": "f"
+	}]
+}
