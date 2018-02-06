@@ -36,4 +36,6 @@ public interface PassengerGraphRepository extends GraphRepository<PassengerGraph
 	//@Query("MATCH (f:Flight {id={0}})<-[:FLEW_ON]-(pass) RETURN pass")
 	//Collection<PassengerGraph> getPassengersByFlight(@Param("id") FlightGraph flight);
 	
+	@Query("MATCH (m:Document)<-[r:HAS_A]-(a:Passenger) where m.documentNumber={documentNumber} RETURN m,r,a")
+	Collection<PassengerGraph> getPassengersByDocumentNumber(@Param("documentNumber") String number);
 }

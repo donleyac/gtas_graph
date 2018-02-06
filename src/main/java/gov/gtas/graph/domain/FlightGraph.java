@@ -118,7 +118,7 @@ public class FlightGraph {
 	public void setPassengers(Set<PassengerGraph> passengers) {
 		this.passengers = passengers;
 	}  
-	/**
+
 	@Override
     public int hashCode() {
        return Objects.hash(this.flightNumber, this.flightDate, this.embarkation, this.debarkation);
@@ -136,5 +136,5 @@ public class FlightGraph {
                 && Objects.equals(this.embarkation, other.embarkation)
                 && Objects.equals(this.debarkation, other.debarkation);
     }
-    **/
+
 }

@@ -35,8 +35,8 @@ public class PassengerRepositoryTest {
 	@Autowired
 	private PassengerGraphRepository passengerRepository;
 	
-	@Before
-	@Transactional
+	//@Before
+	//@Transactional
 	public void setUp() {
 		passengerRepository.deleteAll();
 		FlightGraph flight = new FlightGraph("2222","1-16-2018","IAD","JFK","USA","USA");
@@ -44,15 +44,15 @@ public class PassengerRepositoryTest {
 		instance.save(flight);
 
 		PassengerGraph keanu = new PassengerGraph("John","Vernon","M","10-10-1977");
-		keanu.getFlights().add(flight);
+		//keanu.getFlights().add(flight);
 		keanu.getAdresses().add(getAddress());
 		PassengerGraph teenu = new PassengerGraph("Ertel","David","M","9-9-1977");
-		teenu.getFlights().add(flight);
+		//teenu.getFlights().add(flight);
 		//team.stream().forEach(person -> log.info("\t" + person.toString()));
 		teenu.getAdresses().add(getAddress());
 		passengerRepository.save(keanu);
 		passengerRepository.save(keanu);
-		teenu.TravelsWith(keanu);
+		//teenu.TravelsWith(keanu);
 		passengerRepository.save(keanu);
 		//FlightPax fp = new FlightPax(flight, keanu);
 		//fp.addRoleName("FLEW_ON");

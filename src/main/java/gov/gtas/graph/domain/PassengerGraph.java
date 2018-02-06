@@ -39,8 +39,8 @@ public class PassengerGraph {
     private String dob;
     private Long flightId;
     
-	@Relationship(type = "FLEW_ON", direction = Relationship.OUTGOING)
-	private List<FlightGraph> flights = new ArrayList<>();
+	//@Relationship(type = "FLEW_ON", direction = Relationship.OUTGOING)
+	//private List<FlightGraph> flights = new ArrayList<>();
 	
 	@Relationship(type = "HAS_A", direction = Relationship.OUTGOING)
 	private List<DocumentGraph> documents = new ArrayList<>();
@@ -51,7 +51,7 @@ public class PassengerGraph {
 	@Relationship(type = "BOOKED_BY",direction = Relationship.OUTGOING)
 	private List<AgencyGraph> agencies = new ArrayList<>();
 
-	@Relationship(type = "BOOKED_WITH",direction = Relationship.OUTGOING)
+	@Relationship(type = "USES",direction = Relationship.OUTGOING)
 	private List<CreditCardGraph> creditCards = new ArrayList<>();
 	
 	@Relationship(type = "PHONE",direction = Relationship.OUTGOING)
@@ -100,7 +100,7 @@ public class PassengerGraph {
 	public void setCreditCards(List<CreditCardGraph> creditCards) {
 		this.creditCards = creditCards;
 	}
-    
+  /**  
 	@Relationship(type = "CO_TRAVELLER", direction = Relationship.UNDIRECTED)
 	public Set<PassengerGraph> coTravellers;
 
@@ -109,7 +109,7 @@ public class PassengerGraph {
 			coTravellers = new HashSet<>();
 		}
 		coTravellers.add(person);
-	}
+	}**/
 	public Long getId() {
 		return id;
 	}
@@ -117,7 +117,7 @@ public class PassengerGraph {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+/**
 	public List<FlightGraph> getFlights() {
 		return flights;
 	}
@@ -125,7 +125,7 @@ public class PassengerGraph {
 	public void setFlights(List<FlightGraph> flights) {
 		this.flights = flights;
 	}
-
+**/
 	public List<AddressGraph> getAdresses() {
 		return adresses;
 	}
@@ -197,7 +197,7 @@ public class PassengerGraph {
 	public void setDocuments(List<DocumentGraph> documents) {
 		this.documents = documents;
 	}
-
+/**
 	public Set<PassengerGraph> getCoTravellers() {
 		return coTravellers;
 	}
@@ -205,7 +205,7 @@ public class PassengerGraph {
 	public void setCoTravellers(Set<PassengerGraph> coTravellers) {
 		this.coTravellers = coTravellers;
 	}
-	/**
+**/
 	@Override
     public int hashCode() {
        return Objects.hash(this.firstName, this.lastName, this.gender, this.dob);
@@ -221,7 +221,8 @@ public class PassengerGraph {
         return Objects.equals(this.firstName, other.firstName)
                 && Objects.equals(this.lastName, other.lastName)
                 && Objects.equals(this.gender, other.gender)
-                && Objects.equals(this.dob, other.dob);
+                && Objects.equals(this.dob, other.dob)
+                && Objects.equals(this.flightId, other.flightId);
     }	
- **/
+
 }

@@ -9,7 +9,6 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import gov.gtas.rdbms.domain.Document;
 
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @NodeEntity(label="Document")
@@ -20,6 +19,11 @@ public class DocumentGraph {
 	@GraphId
     private Long id;  
     
+	private String documentType;
+	private String documentNumber;
+	private String expirationDate;
+	private String issuanceCountry;
+	
     public Long getId() {  
         return id;  
     }
@@ -27,10 +31,6 @@ public class DocumentGraph {
     public void setId(Long id) {
         this.id = id;
     }
-	private String documentType;
-	private String documentNumber;
-	private String expirationDate;
-	private String issuanceCountry;
 
 	public String getDocumentType() {
 		return documentType;

@@ -54,4 +54,9 @@ public class PassengerGraphService {
 		result.put(key2, value2);
 		return result;
 	}
+	
+	public Collection<PassengerGraph> findByDocumentNumber(String dNumber){
+		
+		return passengerRepository.getPassengersByDocumentNumber(dNumber);
+	}
 }

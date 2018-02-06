@@ -18,13 +18,9 @@ public class AgencyGraph {
 	private Long id;
   
     private String name;
-    
-    /** IATA airport/city code of the delivering system */
     private String location;
-    
-    /** IATA travel agency ID number */
     private String identifier;
-    
+   
     private String country;
 
     private String phone;

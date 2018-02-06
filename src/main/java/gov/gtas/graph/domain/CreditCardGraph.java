@@ -8,7 +8,6 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @NodeEntity(label="CreditCard")
 public class CreditCardGraph {
@@ -21,8 +20,8 @@ public class CreditCardGraph {
     private String number;
     private String expiration;
     private String accountHolder;
-    private String accountHolderAddress;
-    private String accountHolderPhone;
+   // private String accountHolderAddress;
+   // private String accountHolderPhone;
     
     public Long getId() {  
         return id;  
@@ -63,7 +62,7 @@ public class CreditCardGraph {
 	public void setAccountHolder(String accountHolder) {
 		this.accountHolder = accountHolder;
 	}
-
+/**
 	public String getAccountHolderAddress() {
 		return accountHolderAddress;
 	}
@@ -79,7 +78,8 @@ public class CreditCardGraph {
 	public void setAccountHolderPhone(String accountHolderPhone) {
 		this.accountHolderPhone = accountHolderPhone;
 	}
-	/**
+	
+
     @Override
     public int hashCode() {
         return Objects.hash(this.cardType, this.number, this.expiration);
@@ -97,5 +97,5 @@ public class CreditCardGraph {
         return Objects.equals(this.cardType, other.cardType)
                 && Objects.equals(this.number, other.number) 
                 && Objects.equals(this.expiration, other.expiration);
-    }  **/         
+    }  **/       
 }

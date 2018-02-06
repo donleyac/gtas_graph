@@ -79,7 +79,7 @@ public class FlightRespositoryTest {
 	
 	@Test
 	@Transactional
-	public void testFindByFirstName() {
+	public void testCreateGraphObejets() {
 		instance.deleteAll();
 		passengerRepository.deleteAll();
 		flightPaxGraphRepository.deleteAll();
@@ -91,8 +91,8 @@ public class FlightRespositoryTest {
 			
 			FlightGraph flight = new FlightGraph(f.getFullFlightNumber(),f.getFlightDate().toString(),
 					f.getOrigin(),f.getDestination(),f.getOriginCountry(),f.getDestinationCountry());
-			FlightPaxGraph fpg = new FlightPaxGraph();
-			fpg.setFlight(flight);
+			//FlightPaxGraph fpg = new FlightPaxGraph();
+			//fpg.setFlight(flight);
 			instance.save(flight);
 			
 			if(f.getPassengerCount() != null && f.getPassengerCount() > 0){
@@ -100,7 +100,7 @@ public class FlightRespositoryTest {
 					
 					PassengerGraph pg = new PassengerGraph(p.getFirstName(),p.getLastName(),
 							p.getGender(),p.getDob().toString());
-					pg.getFlights().add(flight);
+					//pg.getFlights().add(flight);
 					pg.setFlightId(flight.getId());
 					//passengerRepository.save(pg);
 					flight.getPassengers().add(pg);
@@ -120,7 +120,7 @@ public class FlightRespositoryTest {
 						}
 					}
 					passengerRepository.save(pg);
-					fpg.setPassenger(pg);
+					//fpg.setPassenger(pg);
 				}
 				instance.save(flight);
 
@@ -135,7 +135,6 @@ public class FlightRespositoryTest {
 		
 		if(pnr.getAddresses() != null && pnr.getAddresses().size() >0){
 			for(Address a:pnr.getAddresses()){
-				
 				AddressGraph ag=new AddressGraph();
 				ag.setCity(a.getCity());
 				ag.setCountry(a.getCountry());
@@ -156,7 +155,15 @@ public class FlightRespositoryTest {
 		if(pnr.getCreditCards() != null && pnr.getCreditCards().size()>0){
 			for(CreditCard cc:pnr.getCreditCards()){
 				CreditCardGraph ccg=new CreditCardGraph();
-				BeanUtils.copyProperties(cc, ccg);
+				//BeanUtils.copyProperties(cc, ccg);
+				//ccg.setAccountHolder(cc.getAccountHolder());
+				//ccg.setAccountHolderAddress(cc.getAccountHolderAddress());
+				//ccg.setAccountHolderPhone(cc.getAccountHolderPhone());
+				ccg.setCardType(cc.getCardType());
+				if(cc.getExpiration()!= null){
+					ccg.setExpiration(cc.getExpiration().toString());
+				}
+				ccg.setNumber(cc.getNumber());
 				p.getCreditCards().add(ccg);
 			}
 		}
@@ -167,6 +174,7 @@ public class FlightRespositoryTest {
 				p.getPhones().add(phg);
 			}
 		}
+		
 		if(pnr.getEmails() != null && pnr.getEmails().size()>0){
 			for(Email e : pnr.getEmails()){
 				EmailGraph eg=new EmailGraph();
