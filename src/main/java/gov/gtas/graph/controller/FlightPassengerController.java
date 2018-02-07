@@ -19,7 +19,7 @@ import gov.gtas.graph.services.FlightGraphService;
 import gov.gtas.graph.services.FlightPaxGraphService;
 import gov.gtas.graph.services.PassengerGraphService;
 
-@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController("/gtas-graph")
 public class FlightPassengerController {
 
@@ -28,21 +28,21 @@ public class FlightPassengerController {
 
 	@Autowired
 	PassengerGraphService passengerGraphService;
-	
+
 	@Autowired
 	FlightGraphService flightGraphService;
-	
+
 	@RequestMapping("/graph")
 	public Map<String, Object> getFlightGraph(@RequestParam(value = "limit",required = false) Integer limit,HttpServletResponse  response) {
 		//response.
 		return service.graph(limit == null ? 100 : limit);
 	}
-	
+
 	@RequestMapping("/searchFlight")
 	public Map<String,Object> findByFlightNumber(@Param("flightNumber") String flightNumber){
 		return flightGraphService.findByFlightNumber(flightNumber);
 	}
-	
+
 	@RequestMapping("/search")
 	public Collection<PassengerGraph> searchDocumentByCriteria(@Param("documentNumber") String number){
 		number="52263000";
@@ -53,5 +53,5 @@ public class FlightPassengerController {
 		}
 		return passengers;
 	}
-	
+
 }
