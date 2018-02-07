@@ -8,6 +8,9 @@
     padding-right: 0px;
   }
 }
-.sidebar-open {
+.sidebar-closed {
   transform: translateX(-350px);
+  .fa-arrow-left {
+    transform: rotate(180deg);
+  }
 }

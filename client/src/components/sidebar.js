@@ -8,7 +8,7 @@ export class Sidepanel extends Component {
     this.state ={
       "Address": {titlecheck:true},
       "Agency": {titlecheck:true},
-      sideBarOpen: true
+      sideBarClosed: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSidebarBtn = this.handleSidebarBtn.bind(this);
@@ -24,13 +24,13 @@ export class Sidepanel extends Component {
     });
   }
   handleSidebarBtn(){
-    this.state.sideBarOpen
-    ?this.setState({sideBarOpen:false})
-    :this.setState({sideBarOpen:true});
+    this.state.sideBarClosed
+    ?this.setState({sideBarClosed:false})
+    :this.setState({sideBarClosed:true});
   }
   render() {
     let sideBarClass = "sidebar-tray";
-    sideBarClass=this.state.sideBarOpen?sideBarClass+" sidebar-open":sideBarClass;
+    sideBarClass=this.state.sideBarClosed?sideBarClass+" sidebar-closed":sideBarClass;
     return (
       <div className={sideBarClass}>
         <div className="cbp-sidebar sidebar after-header">
@@ -64,7 +64,7 @@ export class Sidepanel extends Component {
           </form>
         </div>
         <button onClick={this.handleSidebarBtn} type="button" className="btn btn-flex-fix  btn-icon-only btn-primary">
-          <i className="fa fa-inverse fa-arrow-right"></i>
+          <i className="fa fa-inverse fa-arrow-left"></i>
           <span className="sr-only">Search</span>
         </button>
       </div>

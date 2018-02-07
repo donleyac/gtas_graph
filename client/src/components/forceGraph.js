@@ -20,7 +20,7 @@ render(){
         labelAttr="label"
         onSelectNode={(event, node) => this.setState({tooltip:JSON.stringify(node)})}
         onDeselectNode={(event, node)=> this.setState({tooltip:""})}
-
+        zoom
         highlightDependencies
         showLabels>
         {this.props.data["nodes"].map((node,index)=>{
