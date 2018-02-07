@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +19,7 @@ import gov.gtas.graph.services.FlightGraphService;
 import gov.gtas.graph.services.FlightPaxGraphService;
 import gov.gtas.graph.services.PassengerGraphService;
 
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 @RestController("/gtas-graph")
 public class FlightPassengerController {
 
@@ -29,7 +33,8 @@ public class FlightPassengerController {
 	FlightGraphService flightGraphService;
 	
 	@RequestMapping("/graph")
-	public Map<String, Object> getFlightGraph(@RequestParam(value = "limit",required = false) Integer limit) {
+	public Map<String, Object> getFlightGraph(@RequestParam(value = "limit",required = false) Integer limit,HttpServletResponse  response) {
+		//response.
 		return service.graph(limit == null ? 100 : limit);
 	}
 	
@@ -41,7 +46,7 @@ public class FlightPassengerController {
 	@RequestMapping("/search")
 	public Collection<PassengerGraph> searchDocumentByCriteria(@Param("documentNumber") String number){
 		number="52263000";
-		Set<PassengerGraph> passengers=(Set<PassengerGraph>) passengerGraphService.findByDocumentNumber(number);
+		List<PassengerGraph> passengers=(List<PassengerGraph>) passengerGraphService.findByDocumentNumber(number);
 		for(PassengerGraph p:passengers){
 			System.out.println("Passenger : "+p.getFirstName());
 			System.out.println("Passenger docs : "+p.getDocuments().size());
