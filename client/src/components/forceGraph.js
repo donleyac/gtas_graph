@@ -1,14 +1,18 @@
+// @flow
 import React, {Component} from 'react';
 import axios from 'axios';
 import { InteractiveForceGraph, ForceGraphNode, ForceGraphArrowLink} from 'react-vis-force';
 import {Tooltip} from 'react-bootstrap';
-export default class ForceGraphImpl extends Component {
-  constructor(props) {
+
+type Props = {};
+type State = {tooltip: string, data: any}
+export default class ForceGraphImpl extends Component<Props, State>{
+  constructor(props: any) {
     super(props);
     this.state = {
       tooltip: "",
-      data: {} 
-    }
+      data: {}
+    };
   }
   componentWillMount(){
     axios.get('http://localhost:8080/gtas-graph/graph')
