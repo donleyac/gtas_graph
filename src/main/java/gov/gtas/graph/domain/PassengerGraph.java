@@ -37,38 +37,49 @@ public class PassengerGraph {
     private String citizenshipCountry;
     private String residencyCountry;
     private String dob;
-    private Long flightId;
+    //private Long flightId;
+    private Long paxId;
     
-	//@Relationship(type = "FLEW_ON", direction = Relationship.OUTGOING)
-	//private List<FlightGraph> flights = new ArrayList<>();
+	@Relationship(type = "FLEW_ON", direction = Relationship.INCOMING)
+	private List<FlightGraph> flights = new ArrayList<>();
 	
-	@Relationship(type = "HAS_A", direction = Relationship.OUTGOING)
+	@Relationship(type = "HAS_A", direction = Relationship.INCOMING)
 	private List<DocumentGraph> documents = new ArrayList<>();
 	
-	@Relationship(type = "LIVED_IN", direction = Relationship.OUTGOING)
-	private List<AddressGraph> adresses = new ArrayList<>();
+	//@Relationship(type = "LIVED_IN", direction = Relationship.OUTGOING)
+	//private List<AddressGraph> adresses = new ArrayList<>();
 
-	@Relationship(type = "BOOKED_BY",direction = Relationship.OUTGOING)
-	private List<AgencyGraph> agencies = new ArrayList<>();
+	//@Relationship(type = "BOOKED_BY",direction = Relationship.OUTGOING)
+	//private List<AgencyGraph> agencies = new ArrayList<>();
 
-	@Relationship(type = "USES",direction = Relationship.OUTGOING)
-	private List<CreditCardGraph> creditCards = new ArrayList<>();
+	//@Relationship(type = "CREDIT",direction = Relationship.OUTGOING)
+	//private List<CreditCardGraph> creditCards = new ArrayList<>();
 	
 	@Relationship(type = "PHONE",direction = Relationship.OUTGOING)
 	private List<PhoneGraph> phones = new ArrayList<>();
 	
 	@Relationship(type = "EMAIL",direction = Relationship.OUTGOING)
 	private List<EmailGraph> emails = new ArrayList<>();
+
+	@Relationship(type = "EMAIL",direction = Relationship.OUTGOING)
+	private List<FlightPaxGraph> flightPaxes = new ArrayList<>();
 	
-	
-    public Long getFlightId() {
+    public Long getPaxId() {
+		return paxId;
+	}
+
+	public void setPaxId(Long paxId) {
+		this.paxId = paxId;
+	}
+/**
+	public Long getFlightId() {
 		return flightId;
 	}
 
 	public void setFlightId(Long flightId) {
 		this.flightId = flightId;
 	}
-
+**/
 	public List<PhoneGraph> getPhones() {
 		return phones;
 	}
@@ -84,7 +95,7 @@ public class PassengerGraph {
 	public void setEmails(List<EmailGraph> emails) {
 		this.emails = emails;
 	}
-
+	  /**
 	public List<AgencyGraph> getAgencies() {
 		return agencies;
 	}
@@ -100,7 +111,7 @@ public class PassengerGraph {
 	public void setCreditCards(List<CreditCardGraph> creditCards) {
 		this.creditCards = creditCards;
 	}
-  /**  
+  
 	@Relationship(type = "CO_TRAVELLER", direction = Relationship.UNDIRECTED)
 	public Set<PassengerGraph> coTravellers;
 
@@ -109,6 +120,13 @@ public class PassengerGraph {
 			coTravellers = new HashSet<>();
 		}
 		coTravellers.add(person);
+	}
+		public List<AddressGraph> getAdresses() {
+		return adresses;
+	}
+
+	public void setAdresses(List<AddressGraph> adresses) {
+		this.adresses = adresses;
 	}**/
 	public Long getId() {
 		return id;
@@ -117,21 +135,13 @@ public class PassengerGraph {
 	public void setId(Long id) {
 		this.id = id;
 	}
-/**
+
 	public List<FlightGraph> getFlights() {
 		return flights;
 	}
 
 	public void setFlights(List<FlightGraph> flights) {
 		this.flights = flights;
-	}
-**/
-	public List<AddressGraph> getAdresses() {
-		return adresses;
-	}
-
-	public void setAdresses(List<AddressGraph> adresses) {
-		this.adresses = adresses;
 	}
 
 	public String getFirstName() {
@@ -221,8 +231,7 @@ public class PassengerGraph {
         return Objects.equals(this.firstName, other.firstName)
                 && Objects.equals(this.lastName, other.lastName)
                 && Objects.equals(this.gender, other.gender)
-                && Objects.equals(this.dob, other.dob)
-                && Objects.equals(this.flightId, other.flightId);
+                && Objects.equals(this.dob, other.dob);
     }	
 
 }

@@ -38,6 +38,7 @@ public class PassengerRepositoryTest {
 	//@Before
 	//@Transactional
 	public void setUp() {
+		/**
 		passengerRepository.deleteAll();
 		FlightGraph flight = new FlightGraph("2222","1-16-2018","IAD","JFK","USA","USA");
 
@@ -60,6 +61,7 @@ public class PassengerRepositoryTest {
 		flight.getPassengers().add(teenu);
 		flight.getPassengers().add(teenu);
 		instance.save(flight);
+		**/
 	}
 
 	@After

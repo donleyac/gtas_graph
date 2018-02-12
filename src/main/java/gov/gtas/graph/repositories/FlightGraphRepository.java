@@ -14,5 +14,6 @@ import gov.gtas.graph.domain.FlightGraph;
 public interface FlightGraphRepository extends GraphRepository<FlightGraph>{
 
 	Collection<FlightGraph> findByFlightNumber(String flightNumber);
+	FlightGraph findByGtasId(Long id);
 	
 }

@@ -1,9 +1,12 @@
 package gov.gtas.graph.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -16,21 +19,44 @@ public class AgencyGraph {
  
 	@GraphId
 	private Long id;
-  
     private String name;
     private String location;
     private String identifier;
-   
     private String country;
-
     private String phone;
-    
     private String city;
-    
     private String type;
+    private Long gtasId;
+    
+    @Relationship(type = "BOOKED_AT",direction = Relationship.INCOMING)
+    public List<PassengerGraph> passengers=new ArrayList<>();
     
     
-    public String getCity() {
+    public List<PassengerGraph> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(List<PassengerGraph> passengers) {
+		this.passengers = passengers;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getGtasId() {
+		return gtasId;
+	}
+
+	public void setGtasId(Long gtasId) {
+		this.gtasId = gtasId;
+	}
+
+	public String getCity() {
 		return city;
 	}
 

@@ -28,6 +28,7 @@ public class FlightGraphService {
 		return toD3Format(result);
 	}
 	private Map<String, Object> toD3Format(Collection<FlightGraph> flights) {
+		/**
 		List<Map<String, Object>> nodes = new ArrayList<>();
 		List<Map<String, Object>> rels = new ArrayList<>();
 		int i = 0;
@@ -48,7 +49,8 @@ public class FlightGraphService {
 				rels.add(map("source", source, "target", target));
 			}
 		}
-		return map("nodes", nodes, "links", rels);
+		return map("nodes", nodes, "links", rels);**/
+		return null;
 	}
 	
 	private Map<String, Object> map(String key1, Object value1, String key2, Object value2) {

@@ -30,6 +30,7 @@ public class FlightGraph {
     private String debarkation;
     private String embarkCountry;
     private String debarkCountry;
+    private Long gtasId;
    
     public FlightGraph(String fn,String fd,String emb,String deb,String emC,String dbC){
     	this.flightNumber=fn;
@@ -43,9 +44,16 @@ public class FlightGraph {
     	
     }
     
-	@Relationship(type = "FLEW_ON", direction = Relationship.INCOMING)
-	private Set<PassengerGraph> passengers = new HashSet<>();
+	//@Relationship(type = "FLEW_ON", direction = Relationship.INCOMING)
+	//private Set<PassengerGraph> passengers = new HashSet<>();
+
 	
+	public Long getGtasId() {
+		return gtasId;
+	}
+	public void setGtasId(Long gtasId) {
+		this.gtasId = gtasId;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -111,7 +119,7 @@ public class FlightGraph {
 	}
 	public void addFlightPax(FlightPax pax) {
 		this.addFlightPax(pax);
-	}**/
+	}
 	public Set<PassengerGraph> getPassengers() {
 		return passengers;
 	}
@@ -136,5 +144,5 @@ public class FlightGraph {
                 && Objects.equals(this.embarkation, other.embarkation)
                 && Objects.equals(this.debarkation, other.debarkation);
     }
-
+**/
 }

@@ -2,7 +2,9 @@ package gov.gtas.rdbms;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,6 +29,10 @@ import gov.gtas.graph.domain.FlightGraph;
 import gov.gtas.graph.domain.FlightPaxGraph;
 import gov.gtas.graph.domain.PassengerGraph;
 import gov.gtas.graph.domain.PhoneGraph;
+import gov.gtas.graph.repositories.AddressGraphRepository;
+import gov.gtas.graph.repositories.AgencyGraphRepository;
+import gov.gtas.graph.repositories.CreditCardGraphRepository;
+import gov.gtas.graph.repositories.DocumentGraphRepository;
 import gov.gtas.graph.repositories.FlightGraphRepository;
 import gov.gtas.graph.repositories.FlightPaxGraphRepository;
 import gov.gtas.graph.repositories.PassengerGraphRepository;
@@ -66,6 +72,18 @@ public class FlightRespositoryTest {
 	@Autowired
 	private FlightPaxGraphRepository flightPaxGraphRepository;
 	
+	@Autowired
+	private DocumentGraphRepository documentGraphRepository;
+	
+	@Autowired
+	private AddressGraphRepository addressGraphRepository;
+	
+	@Autowired
+	private AgencyGraphRepository agencyGraphRepository;	
+	
+	@Autowired
+	private CreditCardGraphRepository ccGraphRepository;	
+	
 	@Before
 	@Transactional
 	public void setUp() {
@@ -83,6 +101,10 @@ public class FlightRespositoryTest {
 		instance.deleteAll();
 		passengerRepository.deleteAll();
 		flightPaxGraphRepository.deleteAll();
+		documentGraphRepository.deleteAll();
+		addressGraphRepository.deleteAll();
+		agencyGraphRepository.deleteAll();
+		ccGraphRepository.deleteAll();
 		
 		List<Flight> flights=flightRepository.findAll();
 		
@@ -92,25 +114,42 @@ public class FlightRespositoryTest {
 			FlightGraph flight = new FlightGraph(f.getFullFlightNumber(),f.getFlightDate().toString(),
 					f.getOrigin(),f.getDestination(),f.getOriginCountry(),f.getDestinationCountry());
 			//FlightPaxGraph fpg = new FlightPaxGraph();
-			//fpg.setFlight(flight);
+			flight.setGtasId(f.getId());
+			FlightGraph existflight=instance.findByGtasId(f.getId());
+			if(existflight != null && existflight.getId() != null){
+				flight=existflight;
+			}
 			instance.save(flight);
-			
+			//fpg.setFlight(flight);
 			if(f.getPassengerCount() != null && f.getPassengerCount() > 0){
 				for(Passenger p:f.getPassengers()){
 					
 					PassengerGraph pg = new PassengerGraph(p.getFirstName(),p.getLastName(),
 							p.getGender(),p.getDob().toString());
-					//pg.getFlights().add(flight);
-					pg.setFlightId(flight.getId());
-					//passengerRepository.save(pg);
-					flight.getPassengers().add(pg);
-					//System.out.println("ADDED :"+p.getFirstName());
+					
+			
+					pg.setPaxId(p.getId());
+					PassengerGraph existing=passengerRepository.findByPaxId(pg.getPaxId());
+					if(existing != null && existing.getId() != null){
+						pg=existing;
+					}
+					passengerRepository.save(pg);
+					pg.getFlights().add(flight);
+
 					if(p.getDocuments() != null){
 						for(Document d:p.getDocuments()){
 							DocumentGraph dg = new DocumentGraph();
-							dg.setDocumentNumber(d.getDocumentNumber());
-							dg.setDocumentType(d.getDocumentType());
-							dg.setExpirationDate(d.getExpirationDate() == null?"0":d.getExpirationDate().toString());
+							DocumentGraph cdg=documentGraphRepository.findByGtasDocId(d.getId());
+							if(cdg != null && cdg.getId()!= null){
+								System.out.println("Document Exists");
+								dg=cdg;
+							}else{
+								dg.setGtasDocId(d.getId());
+								dg.setDocumentNumber(d.getDocumentNumber());
+								dg.setDocumentType(d.getDocumentType());
+								dg.setExpirationDate(d.getExpirationDate() == null?"0":d.getExpirationDate().toString());
+							}
+							documentGraphRepository.save(dg);
 							pg.getDocuments().add(dg);
 						}
 					}
@@ -136,37 +175,62 @@ public class FlightRespositoryTest {
 		if(pnr.getAddresses() != null && pnr.getAddresses().size() >0){
 			for(Address a:pnr.getAddresses()){
 				AddressGraph ag=new AddressGraph();
-				ag.setCity(a.getCity());
-				ag.setCountry(a.getCountry());
-				ag.setLine1(a.getLine1());
-				ag.setLine2(a.getLine2());
-				ag.setPostalCode(a.getPostalCode());
-				ag.setState(a.getState());
-				p.getAdresses().add(ag);
+				AddressGraph cag=addressGraphRepository.findByGtasId(a.getId());
+				if(cag != null && cag.getId() != null){
+					ag=cag;
+				}else{
+					ag.setGtasId(a.getId());
+					ag.setCity(a.getCity());
+					ag.setCountry(a.getCountry());
+					ag.setLine1(a.getLine1());
+					ag.setLine2(a.getLine2());
+					ag.setPostalCode(a.getPostalCode());
+					ag.setState(a.getState());					
+				}
+				addressGraphRepository.save(ag);
+				ag.getPassengers().add(p);
 			}
 		}
 		if(pnr.getAgencies() != null && pnr.getAgencies().size()>0){
 			for(Agency agency:pnr.getAgencies()){
 				AgencyGraph ang=new AgencyGraph();
-				BeanUtils.copyProperties(agency, ang);
-				p.getAgencies().add(ang);
+				AgencyGraph cang=agencyGraphRepository.findByGtasId(agency.getId());
+				if(cang != null && cang.getId() != null){
+					ang=cang;
+				}else{
+					ang.setCity(agency.getCity());
+					ang.setCountry(agency.getCountry());
+					ang.setIdentifier(agency.getIdentifier());
+					ang.setLocation(agency.getLocation());
+					ang.setName(agency.getName());
+					ang.setPhone(agency.getPhone());
+					ang.setType(agency.getType());
+					//BeanUtils.copyProperties(agency, ang);
+					ang.setGtasId(agency.getId());
+				}
+				agencyGraphRepository.save(ang);
+				ang.getPassengers().add(p);
 			}
 		}
 		if(pnr.getCreditCards() != null && pnr.getCreditCards().size()>0){
 			for(CreditCard cc:pnr.getCreditCards()){
 				CreditCardGraph ccg=new CreditCardGraph();
-				//BeanUtils.copyProperties(cc, ccg);
-				//ccg.setAccountHolder(cc.getAccountHolder());
-				//ccg.setAccountHolderAddress(cc.getAccountHolderAddress());
-				//ccg.setAccountHolderPhone(cc.getAccountHolderPhone());
-				ccg.setCardType(cc.getCardType());
-				if(cc.getExpiration()!= null){
-					ccg.setExpiration(cc.getExpiration().toString());
+				CreditCardGraph chcc=ccGraphRepository.findByGtasId(cc.getId());
+				if(chcc != null && chcc.getId() != null){
+					ccg=chcc;
+				}else{
+					ccg.setCardType(cc.getCardType());
+					if(cc.getExpiration()!= null){
+						ccg.setExpiration(cc.getExpiration().toString());
+					}
+					ccg.setNumber(cc.getNumber());					
 				}
-				ccg.setNumber(cc.getNumber());
-				p.getCreditCards().add(ccg);
+				ccGraphRepository.save(ccg);
+				//p.getCreditCards().add(ccg);
+				ccg.getPassengers().add(p);
 			}
 		}
+		/**
 		if(pnr.getPhones() != null && pnr.getPhones().size()>0){
 			for(Phone ph : pnr.getPhones()){
 				PhoneGraph phg=new PhoneGraph();
@@ -182,6 +246,6 @@ public class FlightRespositoryTest {
 				eg.setDomain(e.getDomain());
 				p.getEmails().add(eg);
 			}
-		}
+		}**/
 	}
 }

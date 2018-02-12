@@ -23,8 +23,17 @@ public class DocumentGraph {
 	private String documentNumber;
 	private String expirationDate;
 	private String issuanceCountry;
+	private Long gtasDocId;
 	
-    public Long getId() {  
+    public Long getGtasDocId() {
+		return gtasDocId;
+	}
+
+	public void setGtasDocId(Long gtasId) {
+		this.gtasDocId = gtasId;
+	}
+
+	public Long getId() {  
         return id;  
     }
 
@@ -63,7 +72,7 @@ public class DocumentGraph {
 	public void setIssuanceCountry(String issuanceCountry) {
 		this.issuanceCountry = issuanceCountry;
 	}
-	/**
+/**
 	@Override
 	public int hashCode() {
 		return Objects.hash( this.documentNumber);
@@ -78,5 +87,5 @@ public class DocumentGraph {
 		final DocumentGraph other = (DocumentGraph) obj;
 		return Objects.equals(this.documentNumber, other.documentNumber);
 	}	
-	**/
+**/
 }

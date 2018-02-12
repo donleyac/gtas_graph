@@ -59,4 +59,10 @@ public class PassengerGraphService {
 		
 		return passengerRepository.getPassengersByDocumentNumber(dNumber);
 	}
+	
+	@Transactional(readOnly = true)
+	public Collection<PassengerGraph> findPassengers(int limit){
+		
+		return passengerRepository.getPassengers(limit);
+	}
 }

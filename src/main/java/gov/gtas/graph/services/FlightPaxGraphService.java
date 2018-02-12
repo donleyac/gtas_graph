@@ -30,30 +30,26 @@ public class FlightPaxGraphService {
 	@Transactional(readOnly = true)
 	public Map<String, Object>  graph(int limit) {
 
-		//Collection<FlightPaxGraph> result = (Collection<FlightPaxGraph>) flightPaxGraphRepository.findAll();
-		//Collection<FlightGraph> flights = passengerRepository.getFlightGraph(100);
-		Collection<FlightGraph> flights = passengerRepository.getFlightPaxGraph();
+		Collection<PassengerGraph> passengers = passengerRepository.getPassengers(limit);
 	
-		return toD3Format(flights);
+		return toD3Format(passengers);
 	}
 	
-	private Map<String, Object> toD3Format(Collection<FlightGraph> flights) {
+	private Map<String, Object> toD3Format(Collection<PassengerGraph> passengers) {
+	
 		List<Map<String, Object>> nodes = new ArrayList<>();
 		List<Map<String, Object>> rels = new ArrayList<>();
 		int i = 0;
-		Iterator<FlightGraph> result = flights.iterator();
+		Iterator<PassengerGraph> result = passengers.iterator();
 		while (result.hasNext()) {
-			FlightGraph flightGraph = result.next();
-			nodes.add(map("title", flightGraph.getFlightNumber(), "label", "flight"));
+			PassengerGraph pGraph = result.next();
+			nodes.add(map("title", pGraph, "label", "Passenger"));
 			int target = i;
 			i++;
-			List<PassengerGraph> passengers = (List<PassengerGraph>) passengerRepository.findByFlightId(flightGraph.getId());
-			for(PassengerGraph p:passengers){
-				flightGraph.getPassengers().add(p);
-			}
+			
 	
-			for (PassengerGraph pass : flightGraph.getPassengers()) {
-				Map<String, Object> actor = map("title", pass.getFirstName(), "label", "passenger");
+			for (FlightGraph f : pGraph.getFlights()) {
+				Map<String, Object> actor = map("title", f, "label", "flight");
 				int source = nodes.indexOf(actor);
 				if (source == -1) {
 					nodes.add(actor);
@@ -63,6 +59,7 @@ public class FlightPaxGraphService {
 			}
 		}
 		return map("nodes", nodes, "links", rels);
+
 	}
 	
 	private Map<String, Object> map(String key1, Object value1, String key2, Object value2) {

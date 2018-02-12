@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import gov.gtas.graph.domain.AgencyGraph;
 import gov.gtas.graph.domain.PassengerGraph;
+import gov.gtas.graph.services.AgencyGraphService;
 import gov.gtas.graph.services.FlightGraphService;
 import gov.gtas.graph.services.FlightPaxGraphService;
 import gov.gtas.graph.services.PassengerGraphService;
@@ -31,6 +33,9 @@ public class FlightPassengerController {
 	
 	@Autowired
 	FlightGraphService flightGraphService;
+	
+	@Autowired
+	AgencyGraphService agencyGraphService;
 	
 	@RequestMapping("/graph")
 	public Map<String, Object> getFlightGraph(@RequestParam(value = "limit",required = false) Integer limit,HttpServletResponse  response) {
@@ -52,6 +57,25 @@ public class FlightPassengerController {
 			System.out.println("Passenger docs : "+p.getDocuments().size());
 		}
 		return passengers;
+	}
+	
+	@RequestMapping("/Passengers")
+	public Collection<PassengerGraph> getPassengers(@RequestParam(value = "limit",required = false) Integer limit){
+		limit=300;
+		List<PassengerGraph> passengers=(List<PassengerGraph>) passengerGraphService.findPassengers(limit);
+		for(PassengerGraph p:passengers){
+			System.out.println("Passenger : "+p.getFirstName());
+			System.out.println("Passenger docs : "+p.getFlights().size());
+		}
+		return passengers;
+	}
+	
+	@RequestMapping("/Agencies")
+	public Collection<AgencyGraph> getPassengersByAgency(@RequestParam(value = "limit",required = false) Integer limit){
+		limit=300;
+		List<AgencyGraph> agencies=(List<AgencyGraph>) ( agencyGraphService.findPassengersByAgency(limit));
+		
+		return agencies;
 	}
 	
 }
