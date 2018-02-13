@@ -18,7 +18,7 @@ public interface PassengerGraphRepository extends GraphRepository<PassengerGraph
 
 	PassengerGraph findByFirstName(@Param("firstName") String firstName);
 	PassengerGraph findByLastName(@Param("larstName") String larstName);
-	PassengerGraph findByPaxId(@Param("paxId") Long paxId);
+	PassengerGraph findByMariaId(@Param("paxId") Long paxId);
 
 	@Query("MATCH (p:Passenger)<-[r:FLEW_ON]-(f:Flight) RETURN p,r,f LIMIT {limit}")
 	Collection<PassengerGraph> getPassengers(@Param("limit") int limit);

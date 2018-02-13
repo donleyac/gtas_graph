@@ -26,7 +26,7 @@ public class AgencyGraph {
     private String phone;
     private String city;
     private String type;
-    private Long gtasId;
+    private Long mariaId;
     
     @Relationship(type = "BOOKED_AT",direction = Relationship.INCOMING)
     public List<PassengerGraph> passengers=new ArrayList<>();
@@ -48,12 +48,12 @@ public class AgencyGraph {
 		this.id = id;
 	}
 
-	public Long getGtasId() {
-		return gtasId;
+	public Long getMariaId() {
+		return mariaId;
 	}
 
-	public void setGtasId(Long gtasId) {
-		this.gtasId = gtasId;
+	public void setMariaId(Long mariaId) {
+		this.mariaId = mariaId;
 	}
 
 	public String getCity() {

@@ -30,7 +30,7 @@ public class FlightGraph {
     private String debarkation;
     private String embarkCountry;
     private String debarkCountry;
-    private Long gtasId;
+    private Long mariaId;
    
     public FlightGraph(String fn,String fd,String emb,String deb,String emC,String dbC){
     	this.flightNumber=fn;
@@ -47,17 +47,17 @@ public class FlightGraph {
 	//@Relationship(type = "FLEW_ON", direction = Relationship.INCOMING)
 	//private Set<PassengerGraph> passengers = new HashSet<>();
 
-	
-	public Long getGtasId() {
-		return gtasId;
-	}
-	public void setGtasId(Long gtasId) {
-		this.gtasId = gtasId;
-	}
+
 	public Long getId() {
 		return id;
 	}
 
+	public Long getMariaId() {
+		return mariaId;
+	}
+	public void setMariaId(Long mariaId) {
+		this.mariaId = mariaId;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}

@@ -9,6 +9,6 @@ import gov.gtas.graph.domain.DocumentGraph;
 public interface DocumentGraphRepository extends GraphRepository<DocumentGraph>{
 
 	public DocumentGraph findByDocumentNumber(String documentNumber);
-	public DocumentGraph findByGtasDocId(Long id);
+	public DocumentGraph findByMariaId(Long id);
 	
 }

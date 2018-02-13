@@ -43,13 +43,13 @@ public class FlightPaxGraphService {
 		Iterator<PassengerGraph> result = passengers.iterator();
 		while (result.hasNext()) {
 			PassengerGraph pGraph = result.next();
-			nodes.add(map("title", pGraph, "label", "Passenger"));
+			nodes.add(map("data", pGraph, "type", "passenger"));
 			int target = i;
 			i++;
 			
 	
 			for (FlightGraph f : pGraph.getFlights()) {
-				Map<String, Object> actor = map("title", f, "label", "flight");
+				Map<String, Object> actor = map("id", f, "type", "flight");
 				int source = nodes.indexOf(actor);
 				if (source == -1) {
 					nodes.add(actor);

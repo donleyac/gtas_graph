@@ -43,7 +43,7 @@ public class FlightPassengerController {
 	@RequestMapping("/graph")
 	public Map<String, Object> getFlightGraph(@RequestParam(value = "limit",required = false) Integer limit,HttpServletResponse  response) {
 		//response.
-		return service.graph(limit == null ? 100 : limit);
+		return service.graph(limit == null ? 5 : limit);
 	}
 
 	@RequestMapping("/searchFlight")
@@ -53,18 +53,18 @@ public class FlightPassengerController {
 
 	@RequestMapping("/search")
 	public Collection<PassengerGraph> searchDocumentByCriteria(@Param("documentNumber") String number){
+		//TODO remove
 		number="52263000";
 		List<PassengerGraph> passengers=(List<PassengerGraph>) passengerGraphService.findByDocumentNumber(number);
-		for(PassengerGraph p:passengers){
-			System.out.println("Passenger : "+p.getFirstName());
-			System.out.println("Passenger docs : "+p.getDocuments().size());
-		}
+		//for(PassengerGraph p:passengers){
+		//}
 		return passengers;
 	}
 
 	
-	@RequestMapping("/Passengers")
+	@RequestMapping("/passengers")
 	public Collection<PassengerGraph> getPassengers(@RequestParam(value = "limit",required = false) Integer limit){
+		//TODO remove
 		limit=300;
 		List<PassengerGraph> passengers=(List<PassengerGraph>) passengerGraphService.findPassengers(limit);
 		for(PassengerGraph p:passengers){
@@ -74,10 +74,11 @@ public class FlightPassengerController {
 		return passengers;
 	}
 	
-	@RequestMapping("/Agencies")
-	public Collection<AgencyGraph> getPassengersByAgency(@RequestParam(value = "limit",required = false) Integer limit){
-		limit=300;
-		List<AgencyGraph> agencies=(List<AgencyGraph>) ( agencyGraphService.findPassengersByAgency(limit));
+	@RequestMapping("/agencies")
+	public Map<String, Object> getPassengersByAgency(@RequestParam(value = "limit",required = false) Integer limit){
+		//TODO remove
+		limit=10;
+		Map<String, Object> agencies=agencyGraphService.agencyGraph(limit);
 		
 		return agencies;
 	}

@@ -10,7 +10,8 @@ import gov.gtas.graph.domain.AgencyGraph;
 
 
 public interface AgencyGraphRepository extends GraphRepository<AgencyGraph>{
-	public AgencyGraph findByGtasId(Long id);
+	
+	public AgencyGraph findByMariaId(Long id);
 	
 
 	@Query("MATCH (a:Agency)<-[r:BOOKED_AT]-(p:Passenger) RETURN a,r,p LIMIT {limit}")

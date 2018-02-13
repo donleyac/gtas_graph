@@ -25,7 +25,7 @@ public class AddressGraph {
     private String state;
     private String country;
     private String postalCode;
-    private Long gtasId;
+    private Long mariaId;
     
     @Relationship(type = "LIVED_AT",direction = Relationship.INCOMING)
     public List<PassengerGraph> passengers=new ArrayList<>();
@@ -36,11 +36,12 @@ public class AddressGraph {
 	public void setPassengers(List<PassengerGraph> passengers) {
 		this.passengers = passengers;
 	}
-	public Long getGtasId() {
-		return gtasId;
+
+	public Long getMariaId() {
+		return mariaId;
 	}
-	public void setGtasId(Long gtasId) {
-		this.gtasId = gtasId;
+	public void setMariaId(Long mariaId) {
+		this.mariaId = mariaId;
 	}
 	public Long getId() {
 		return id;

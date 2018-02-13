@@ -7,5 +7,5 @@ import gov.gtas.graph.domain.AddressGraph;
 
 @Repository
 public interface AddressGraphRepository extends GraphRepository<AddressGraph>{
-	public AddressGraph findByGtasId(Long id);
+	public AddressGraph findByMariaId(Long id);
 }

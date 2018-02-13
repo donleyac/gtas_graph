@@ -23,7 +23,7 @@ public class CreditCardGraph {
     private String number;
     private String expiration;
     private String accountHolder;
-    private Long gtasId;
+    private Long mariaId;
     
     @Relationship(type = "PAID_WITH",direction = Relationship.INCOMING)
     public List<PassengerGraph> passengers=new ArrayList<>();
@@ -44,12 +44,12 @@ public class CreditCardGraph {
         this.id = id;
     }
 
-	public Long getGtasId() {
-		return gtasId;
+	public Long getMariaId() {
+		return mariaId;
 	}
 
-	public void setGtasId(Long gtasId) {
-		this.gtasId = gtasId;
+	public void setMariaId(Long mariaId) {
+		this.mariaId = mariaId;
 	}
 
 	public String getCardType() {

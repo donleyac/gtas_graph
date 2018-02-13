@@ -114,8 +114,8 @@ public class FlightRespositoryTest {
 			FlightGraph flight = new FlightGraph(f.getFullFlightNumber(),f.getFlightDate().toString(),
 					f.getOrigin(),f.getDestination(),f.getOriginCountry(),f.getDestinationCountry());
 			//FlightPaxGraph fpg = new FlightPaxGraph();
-			flight.setGtasId(f.getId());
-			FlightGraph existflight=instance.findByGtasId(f.getId());
+			flight.setMariaId(f.getId());
+			FlightGraph existflight=instance.findByMariaId(f.getId());
 			if(existflight != null && existflight.getId() != null){
 				flight=existflight;
 			}
@@ -128,8 +128,8 @@ public class FlightRespositoryTest {
 							p.getGender(),p.getDob().toString());
 					
 			
-					pg.setPaxId(p.getId());
-					PassengerGraph existing=passengerRepository.findByPaxId(pg.getPaxId());
+					pg.setMariaId(p.getId());
+					PassengerGraph existing=passengerRepository.findByMariaId(pg.getMariaId());
 					if(existing != null && existing.getId() != null){
 						pg=existing;
 					}
@@ -139,18 +139,18 @@ public class FlightRespositoryTest {
 					if(p.getDocuments() != null){
 						for(Document d:p.getDocuments()){
 							DocumentGraph dg = new DocumentGraph();
-							DocumentGraph cdg=documentGraphRepository.findByGtasDocId(d.getId());
+							DocumentGraph cdg=documentGraphRepository.findByMariaId(d.getId());
 							if(cdg != null && cdg.getId()!= null){
 								System.out.println("Document Exists");
 								dg=cdg;
 							}else{
-								dg.setGtasDocId(d.getId());
+								dg.setMariaId(d.getId());
 								dg.setDocumentNumber(d.getDocumentNumber());
 								dg.setDocumentType(d.getDocumentType());
 								dg.setExpirationDate(d.getExpirationDate() == null?"0":d.getExpirationDate().toString());
 							}
 							documentGraphRepository.save(dg);
-							pg.getDocuments().add(dg);
+							//pg.getDocuments().add(dg);
 						}
 					}
 					if(p.getPnrs() != null && p.getPnrs().size() >0){
@@ -175,11 +175,11 @@ public class FlightRespositoryTest {
 		if(pnr.getAddresses() != null && pnr.getAddresses().size() >0){
 			for(Address a:pnr.getAddresses()){
 				AddressGraph ag=new AddressGraph();
-				AddressGraph cag=addressGraphRepository.findByGtasId(a.getId());
+				AddressGraph cag=addressGraphRepository.findByMariaId(a.getId());
 				if(cag != null && cag.getId() != null){
 					ag=cag;
 				}else{
-					ag.setGtasId(a.getId());
+					ag.setMariaId(a.getId());
 					ag.setCity(a.getCity());
 					ag.setCountry(a.getCountry());
 					ag.setLine1(a.getLine1());
@@ -194,7 +194,7 @@ public class FlightRespositoryTest {
 		if(pnr.getAgencies() != null && pnr.getAgencies().size()>0){
 			for(Agency agency:pnr.getAgencies()){
 				AgencyGraph ang=new AgencyGraph();
-				AgencyGraph cang=agencyGraphRepository.findByGtasId(agency.getId());
+				AgencyGraph cang=agencyGraphRepository.findByMariaId(agency.getId());
 				if(cang != null && cang.getId() != null){
 					ang=cang;
 				}else{
@@ -206,7 +206,7 @@ public class FlightRespositoryTest {
 					ang.setPhone(agency.getPhone());
 					ang.setType(agency.getType());
 					//BeanUtils.copyProperties(agency, ang);
-					ang.setGtasId(agency.getId());
+					ang.setMariaId(agency.getId());
 				}
 				agencyGraphRepository.save(ang);
 				ang.getPassengers().add(p);
@@ -215,7 +215,7 @@ public class FlightRespositoryTest {
 		if(pnr.getCreditCards() != null && pnr.getCreditCards().size()>0){
 			for(CreditCard cc:pnr.getCreditCards()){
 				CreditCardGraph ccg=new CreditCardGraph();
-				CreditCardGraph chcc=ccGraphRepository.findByGtasId(cc.getId());
+				CreditCardGraph chcc=ccGraphRepository.findByMariaId(cc.getId());
 				if(chcc != null && chcc.getId() != null){
 					ccg=chcc;
 				}else{

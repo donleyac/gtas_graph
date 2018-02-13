@@ -23,14 +23,15 @@ public class DocumentGraph {
 	private String documentNumber;
 	private String expirationDate;
 	private String issuanceCountry;
-	private Long gtasDocId;
+	private Long mariaId;
 	
-    public Long getGtasDocId() {
-		return gtasDocId;
+
+	public Long getMariaId() {
+		return mariaId;
 	}
 
-	public void setGtasDocId(Long gtasId) {
-		this.gtasDocId = gtasId;
+	public void setMariaId(Long mariaId) {
+		this.mariaId = mariaId;
 	}
 
 	public Long getId() {  

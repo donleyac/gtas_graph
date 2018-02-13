@@ -38,11 +38,11 @@ public class PassengerGraph {
     private String residencyCountry;
     private String dob;
     //private Long flightId;
-    private Long paxId;
+    private Long mariaId;
     
 	@Relationship(type = "FLEW_ON", direction = Relationship.INCOMING)
 	private List<FlightGraph> flights = new ArrayList<>();
-	
+	/**		
 	@Relationship(type = "HAS_A", direction = Relationship.INCOMING)
 	private List<DocumentGraph> documents = new ArrayList<>();
 	
@@ -54,23 +54,25 @@ public class PassengerGraph {
 
 	//@Relationship(type = "CREDIT",direction = Relationship.OUTGOING)
 	//private List<CreditCardGraph> creditCards = new ArrayList<>();
-	
-	@Relationship(type = "PHONE",direction = Relationship.OUTGOING)
+
+	@Relationship(type = "PHONE",direction = Relationship.INCOMING)
 	private List<PhoneGraph> phones = new ArrayList<>();
 	
-	@Relationship(type = "EMAIL",direction = Relationship.OUTGOING)
+	@Relationship(type = "EMAIL",direction = Relationship.INCOMING)
 	private List<EmailGraph> emails = new ArrayList<>();
 
-	@Relationship(type = "EMAIL",direction = Relationship.OUTGOING)
+	@Relationship(type = "EMAIL",direction = Relationship.INCOMING)
 	private List<FlightPaxGraph> flightPaxes = new ArrayList<>();
 	
-    public Long getPaxId() {
-		return paxId;
+**/
+	public Long getMariaId() {
+		return mariaId;
 	}
 
-	public void setPaxId(Long paxId) {
-		this.paxId = paxId;
+	public void setMariaId(Long mariaId) {
+		this.mariaId = mariaId;
 	}
+
 /**
 	public Long getFlightId() {
 		return flightId;
@@ -79,7 +81,7 @@ public class PassengerGraph {
 	public void setFlightId(Long flightId) {
 		this.flightId = flightId;
 	}
-**/
+
 	public List<PhoneGraph> getPhones() {
 		return phones;
 	}
@@ -199,7 +201,7 @@ public class PassengerGraph {
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
-
+/**
 	public List<DocumentGraph> getDocuments() {
 		return documents;
 	}
@@ -207,7 +209,7 @@ public class PassengerGraph {
 	public void setDocuments(List<DocumentGraph> documents) {
 		this.documents = documents;
 	}
-/**
+
 	public Set<PassengerGraph> getCoTravellers() {
 		return coTravellers;
 	}
