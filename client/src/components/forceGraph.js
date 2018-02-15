@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { InteractiveForceGraph, ForceGraphNode, ForceGraphArrowLink} from 'react-vis-force';
 import {Tooltip} from 'react-bootstrap';
+import './forceGraph.scss';
 
 type Props = {data:any};
 type State = {tooltip: string, data: any}
@@ -28,12 +29,18 @@ export default class ForceGraphImpl extends Component<Props, State>{
     const COLOR_MAP = {
       "flight": "blue",
       "passenger": "red",
-      "agency": "purple"
+      "agency": "green",
+      "pnr": "purple",
+      "address": "black",
+      "creditCard":"yellow"
     };
     const LABEL_MAP = {
       "flight": "flightNumber",
       "passenger": "lastName",
-      "agency": "name"
+      "agency": "name",
+      "pnr": "recordLocator",
+      "address": "city",
+      "creditCard": "cardType"
     }
   return(
     <span className="flex justify-content-center full-width">
@@ -41,7 +48,7 @@ export default class ForceGraphImpl extends Component<Props, State>{
       ?<InteractiveForceGraph
         simulationOptions={{ height: 500, width: 700 }}
         labelAttr="label"
-        onSelectNode={(event, node) => this.setState({tooltip:JSON.stringify(node["data"])})}
+        onSelectNode={(event, node) => this.setState({tooltip:JSON.stringify(node["data"], null, 2)})}
         onDeselectNode={(event, node)=> this.setState({tooltip:""})}
         zoom
         highlightDependencies
