@@ -1,60 +1,68 @@
 {
    "links":[
       {
-         "source":2,
-         "target":1
+         "source":933,
+         "target":23
       },
       {
-         "source":3,
-         "target":1
+         "source":934,
+         "target":23
       },
       {
-         "source":4,
-         "target":1
-      },
-      {
-         "source":4,
-         "target":1
+         "source":932,
+         "target":23
       },
       {
          "source":1,
-         "target":0
+         "target":23
       },
       {
-         "source":5,
-         "target":2
+         "source":23,
+         "target":6
       },
       {
-         "source":5,
-         "target":2
+         "source":1,
+         "target":1069
       },
       {
-         "source":2,
-         "target":0
+         "source":940,
+         "target":1069
       },
       {
-         "source":5,
-         "target":3
+         "source":1069,
+         "target":6
       },
       {
-         "source":5,
-         "target":3
+         "source":1,
+         "target":7
       },
       {
-         "source":3,
-         "target":0
+         "source":11,
+         "target":7
       },
       {
-         "source":3,
-         "target":4
+         "source":7,
+         "target":6
       },
       {
-         "source":3,
-         "target":4
+         "source":933,
+         "target":21
       },
       {
-         "source":4,
-         "target":0
+         "source":934,
+         "target":21
+      },
+      {
+         "source":21,
+         "target":6
+      },
+      {
+         "source":23,
+         "target":1071
+      },
+      {
+         "source":21,
+         "target":1071
       }
    ],
    "nodes":[
@@ -519,6 +527,16 @@
             "mariaId":null
          },
          "type":"flight"
+      },
+      {
+        "data":{
+           "id":1071,
+           "recordLocator":"8C99AE",
+           "formOfPayment":"CC",
+           "mariaId":1,
+           "bagCount": 1
+        },
+         "type":"pnr"
       }
    ]
 }

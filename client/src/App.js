@@ -21,7 +21,7 @@ class App extends Component {
         <Navbar />
         <span style={{height: "87vh"}} className="flex">
           <Sidepanel handleSubmit={this.onFormSubmit}/>
-          <ForceGraph data={smallTestJson}/>
+          <ForceGraph data={testJson}/>
           <h2>{this.state.search}</h2>
         </span>
       </span>

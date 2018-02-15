@@ -24,6 +24,15 @@ export default class ForceGraphImpl extends Component<Props, State>{
     })
     .catch(err=>console.log(err));
   }
+
+  //Need to remove complex object clutter from node
+  _cleanNode(node:any){
+    const removeList = ["passengers", "flights"];
+    for(let i=0; i<removeList.length;i++){
+      delete node["data"][removeList[i]];
+    }
+    return node;
+  }
   render(){
     const LINK_VAL:number = 10;
     const COLOR_MAP = {
@@ -54,10 +63,10 @@ export default class ForceGraphImpl extends Component<Props, State>{
         highlightDependencies
         showLabels>
         {this.state.data["nodes"].map((node:any, index: number)=>{
-          const oNode = Object.assign({}, node);
-          oNode["label"] = node["data"]?node["data"][LABEL_MAP[oNode["type"]]]:node["id"];
+          const oNode = Object.assign({}, this._cleanNode(node));
+          oNode["label"] = node["data"][LABEL_MAP[oNode["type"]]];
           //If id not casted to string, links are not visible
-          oNode["id"] = index+"";
+          oNode["id"] = oNode["data"]["id"]+"";
           return (<ForceGraphNode key={index+oNode["type"]}
           node={oNode} fill={COLOR_MAP[oNode["type"]]} />)
         })}
