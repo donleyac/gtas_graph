@@ -1,5 +1,7 @@
 package gov.gtas.graph.vo;
 
+import java.util.Objects;
+
 public class EmailGraphVo {
     private Long id;  
     private String address;
@@ -23,4 +25,18 @@ public class EmailGraphVo {
 		this.domain = domain;
 	}
     
+	@Override
+    public int hashCode() {
+       return Objects.hash(this.getAddress());
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof EmailGraphVo))
+            return false;
+        final EmailGraphVo other = (EmailGraphVo)obj;
+        return Objects.equals(this.getAddress(), other.getAddress());
+    }	
 }

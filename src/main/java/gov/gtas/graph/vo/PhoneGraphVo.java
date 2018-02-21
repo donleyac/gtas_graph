@@ -1,5 +1,9 @@
 package gov.gtas.graph.vo;
 
+import java.util.Objects;
+
+import gov.gtas.graph.domain.PassengerGraph;
+
 public class PhoneGraphVo {
 
     private Long id;  
@@ -17,4 +21,18 @@ public class PhoneGraphVo {
 		this.number = number;
 	}
     
+	@Override
+    public int hashCode() {
+       return Objects.hash(this.number);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof PhoneGraphVo))
+            return false;
+        final PhoneGraphVo other = (PhoneGraphVo)obj;
+        return Objects.equals(this.getNumber(), other.getNumber());
+    }	
 }

@@ -1,7 +1,9 @@
 package gov.gtas.graph.vo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PassengerGraphVo {
 	private Long id;
@@ -15,19 +17,19 @@ public class PassengerGraphVo {
     private Long mariaId;
     private  List<FlightGraphVo> flights=new ArrayList<>();
 	private  List<DocumentGraphVo> documents=new ArrayList<>();
-	private  List<PhoneGraphVo> phones=new ArrayList<>();
-	private  List<EmailGraphVo> emails=new ArrayList<>();
+	private  Set<PhoneGraphVo> phones=new HashSet<>();
+	private  Set<EmailGraphVo> emails=new HashSet<>();
 	
-    public List<PhoneGraphVo> getPhones() {
+    public Set<PhoneGraphVo> getPhones() {
 		return phones;
 	}
-	public void setPhones(List<PhoneGraphVo> phones) {
+	public void setPhones(Set<PhoneGraphVo> phones) {
 		this.phones = phones;
 	}
-	public List<EmailGraphVo> getEmails() {
+	public Set<EmailGraphVo> getEmails() {
 		return emails;
 	}
-	public void setEmails(List<EmailGraphVo> emails) {
+	public void setEmails(Set<EmailGraphVo> emails) {
 		this.emails = emails;
 	}
 	public List<DocumentGraphVo> getDocuments() {
