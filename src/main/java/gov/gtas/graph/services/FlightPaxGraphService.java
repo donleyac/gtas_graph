@@ -12,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import gov.gtas.graph.domain.DocumentGraph;
+import gov.gtas.graph.domain.EmailGraph;
 import gov.gtas.graph.domain.FlightGraph;
 import gov.gtas.graph.domain.FlightPaxGraph;
 import gov.gtas.graph.domain.PassengerGraph;
+import gov.gtas.graph.domain.PhoneGraph;
 import gov.gtas.graph.repositories.FlightPaxGraphRepository;
 import gov.gtas.graph.repositories.PassengerGraphRepository;
+import gov.gtas.graph.vo.EmailGraphVo;
 
 @Service
 public class FlightPaxGraphService {
@@ -46,17 +50,32 @@ public class FlightPaxGraphService {
 			nodes.add(map("data", pGraph, "type", "passenger"));
 			int target = i;
 			i++;
-			
-	
 			for (FlightGraph f : pGraph.getFlights()) {
-				Map<String, Object> actor = map("id", f, "type", "flight");
-				int source = nodes.indexOf(actor);
+				Map<String, Object> flight = map("data", f, "type", "flight");
+				int source = nodes.indexOf(flight);
 				if (source == -1) {
-					nodes.add(actor);
+					nodes.add(flight);
 					source = i++;
 				}
-				rels.add(map("source", source, "target", target));
+				rels.add(map("source", f.getId(), "target", pGraph.getId()));
 			}
+			for(DocumentGraph d : pGraph.getDocuments()){
+				Map<String, Object> doc = map("data", d, "type", "document");
+				nodes.add(doc);
+				rels.add(map("source", d.getId(), "target", pGraph.getId()));
+			}
+			for(EmailGraph e : pGraph.getEmails()){
+				Map<String, Object> email = map("data", e, "type", "email");
+				nodes.add(email);
+				rels.add(map("source", e.getId(), "target", pGraph.getId()));
+			}
+			for(PhoneGraph ph : pGraph.getPhones()){
+				Map<String, Object> phone = map("data", ph, "type", "phone");
+				nodes.add(phone);
+				rels.add(map("source", ph.getId(), "target", pGraph.getId()));
+			}	
+			
+
 		}
 		return map("nodes", nodes, "links", rels);
 

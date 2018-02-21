@@ -42,44 +42,32 @@ public class PassengerGraph {
     
 	@Relationship(type = "FLEW_ON", direction = Relationship.INCOMING)
 	private List<FlightGraph> flights = new ArrayList<>();
-	/**		
+			
 	@Relationship(type = "HAS_A", direction = Relationship.INCOMING)
 	private List<DocumentGraph> documents = new ArrayList<>();
-	
-	//@Relationship(type = "LIVED_IN", direction = Relationship.OUTGOING)
-	//private List<AddressGraph> adresses = new ArrayList<>();
+	/**
+	@Relationship(type = "LIVED_IN", direction = Relationship.OUTGOING)
+	private List<AddressGraph> adresses = new ArrayList<>();
 
-	//@Relationship(type = "BOOKED_BY",direction = Relationship.OUTGOING)
-	//private List<AgencyGraph> agencies = new ArrayList<>();
+	@Relationship(type = "BOOKED_BY",direction = Relationship.OUTGOING)
+	private List<AgencyGraph> agencies = new ArrayList<>();
 
-	//@Relationship(type = "CREDIT",direction = Relationship.OUTGOING)
-	//private List<CreditCardGraph> creditCards = new ArrayList<>();
-
+	@Relationship(type = "BOOKED_WITH",direction = Relationship.OUTGOING)
+	private List<CreditCardGraph> creditCards = new ArrayList<>();
+	**/
 	@Relationship(type = "PHONE",direction = Relationship.INCOMING)
 	private List<PhoneGraph> phones = new ArrayList<>();
 	
 	@Relationship(type = "EMAIL",direction = Relationship.INCOMING)
 	private List<EmailGraph> emails = new ArrayList<>();
 
-	@Relationship(type = "EMAIL",direction = Relationship.INCOMING)
-	private List<FlightPaxGraph> flightPaxes = new ArrayList<>();
-	
-**/
+
 	public Long getMariaId() {
 		return mariaId;
 	}
 
 	public void setMariaId(Long mariaId) {
 		this.mariaId = mariaId;
-	}
-
-/**
-	public Long getFlightId() {
-		return flightId;
-	}
-
-	public void setFlightId(Long flightId) {
-		this.flightId = flightId;
 	}
 
 	public List<PhoneGraph> getPhones() {
@@ -97,7 +85,7 @@ public class PassengerGraph {
 	public void setEmails(List<EmailGraph> emails) {
 		this.emails = emails;
 	}
-	  /**
+/**
 	public List<AgencyGraph> getAgencies() {
 		return agencies;
 	}
@@ -113,23 +101,25 @@ public class PassengerGraph {
 	public void setCreditCards(List<CreditCardGraph> creditCards) {
 		this.creditCards = creditCards;
 	}
-  
-	@Relationship(type = "CO_TRAVELLER", direction = Relationship.UNDIRECTED)
-	public Set<PassengerGraph> coTravellers;
-
-	public void TravelsWith(PassengerGraph person) {
-		if (coTravellers == null) {
-			coTravellers = new HashSet<>();
-		}
-		coTravellers.add(person);
-	}
+  **/
+//	@Relationship(type = "CO_TRAVELLER", direction = Relationship.UNDIRECTED)
+//	public Set<PassengerGraph> coTravellers;
+//
+//	public void TravelsWith(PassengerGraph person) {
+//		if (coTravellers == null) {
+//			coTravellers = new HashSet<>();
+//		}
+//		coTravellers.add(person);
+//	}
+	/**
 		public List<AddressGraph> getAdresses() {
 		return adresses;
 	}
 
 	public void setAdresses(List<AddressGraph> adresses) {
 		this.adresses = adresses;
-	}**/
+	}
+	**/
 	public Long getId() {
 		return id;
 	}
@@ -201,7 +191,7 @@ public class PassengerGraph {
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
-/**
+
 	public List<DocumentGraph> getDocuments() {
 		return documents;
 	}
@@ -209,7 +199,7 @@ public class PassengerGraph {
 	public void setDocuments(List<DocumentGraph> documents) {
 		this.documents = documents;
 	}
-
+	/**
 	public Set<PassengerGraph> getCoTravellers() {
 		return coTravellers;
 	}

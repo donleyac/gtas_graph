@@ -18,7 +18,6 @@ public class DocumentGraph {
 	
 	@GraphId
     private Long id;  
-    
 	private String documentType;
 	private String documentNumber;
 	private String expirationDate;

@@ -16,4 +16,7 @@ public interface AgencyGraphRepository extends GraphRepository<AgencyGraph>{
 
 	@Query("MATCH (a:Agency)<-[r:BOOKED_AT]-(p:Passenger) RETURN a,r,p LIMIT {limit}")
 	public Collection<AgencyGraph> findPassengersByAgency(@Param("limit") int limit);
+	
+	@Query("MATCH (m:Agency)<-[r:BOOKED_AT]-(p:Passenger)-[r1:FLEW_ON]-(f:Flight) return m,r,r1,p,f LIMIT {limit}")
+	public Collection<AgencyGraph> findPassengersFlightsByAgency(@Param("limit") int limit);
 }

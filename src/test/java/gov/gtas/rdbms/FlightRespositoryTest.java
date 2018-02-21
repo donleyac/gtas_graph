@@ -150,7 +150,7 @@ public class FlightRespositoryTest {
 								dg.setExpirationDate(d.getExpirationDate() == null?"0":d.getExpirationDate().toString());
 							}
 							documentGraphRepository.save(dg);
-							//pg.getDocuments().add(dg);
+							pg.getDocuments().add(dg);
 						}
 					}
 					if(p.getPnrs() != null && p.getPnrs().size() >0){
@@ -230,7 +230,7 @@ public class FlightRespositoryTest {
 				ccg.getPassengers().add(p);
 			}
 		}
-		/**
+	
 		if(pnr.getPhones() != null && pnr.getPhones().size()>0){
 			for(Phone ph : pnr.getPhones()){
 				PhoneGraph phg=new PhoneGraph();
@@ -246,6 +246,6 @@ public class FlightRespositoryTest {
 				eg.setDomain(e.getDomain());
 				p.getEmails().add(eg);
 			}
-		}**/
+		}
 	}
 }
