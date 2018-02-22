@@ -15,6 +15,7 @@
     "cbp-theme": "^1.8.1",
     "chalk": "1.1.3",
     "css-loader": "0.28.7",
+    "deepcopy": "^0.6.3",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.0.1",
     "eslint": "4.10.0",

@@ -1,23 +1,19 @@
-// @flow
 import React, {Component} from 'react';
 import axios from 'axios';
 import { InteractiveForceGraph, ForceGraphNode, ForceGraphArrowLink} from 'react-vis-force';
 import {Tooltip} from 'react-bootstrap';
 import './forceGraph.scss';
 
-type Props = {data:any};
-type State = {tooltip: string, data: any}
-export default class ForceGraphImpl extends Component<Props, State>{
-  constructor(props: any) {
+export default class ForceGraphImpl extends Component{
+  constructor(props) {
     super(props);
     this.state = {
       tooltip: "",
-      // data: this.props.data
       data:{}
     };
   }
   componentWillMount(){
-    axios.get('http://localhost:8080/gtas-graph/graph')
+    axios.get('http://localhost:8080/gtas-graph/passengers')
     .then(res => {
       console.log(res.data);
       this.setState({data: res.data});
@@ -25,23 +21,26 @@ export default class ForceGraphImpl extends Component<Props, State>{
     .catch(err=>console.log(err));
   }
 
-  //Need to remove complex object clutter from node
-  _cleanNode(node:any){
-    const removeList = ["passengers", "flights"];
+  //Needed to remove complex object clutter from node
+  _cleanNode(node){
+    const removeList = ["passengers", "flights", "documents", "phones", "emails"];
     for(let i=0; i<removeList.length;i++){
       delete node["data"][removeList[i]];
     }
     return node;
   }
   render(){
-    const LINK_VAL:number = 10;
+    const LINK_VAL = 10;
     const COLOR_MAP = {
       "flight": "blue",
       "passenger": "red",
       "agency": "green",
       "pnr": "purple",
-      "address": "black",
-      "creditCard":"yellow"
+      "address": "lime",
+      "creditCard":"yellow",
+      "document": "orange",
+      "phone": "aqua",
+      "email": "silver"
     };
     const LABEL_MAP = {
       "flight": "flightNumber",
@@ -49,8 +48,11 @@ export default class ForceGraphImpl extends Component<Props, State>{
       "agency": "name",
       "pnr": "recordLocator",
       "address": "city",
-      "creditCard": "cardType"
-    }
+      "creditCard": "cardType",
+      "document": "documentNumber",
+      "phone": "number",
+      "email": "domain"
+    };
   return(
     <span className="flex justify-content-center full-width">
       {this.state.data["nodes"] && this.state.data["links"]
@@ -62,12 +64,12 @@ export default class ForceGraphImpl extends Component<Props, State>{
         zoom
         highlightDependencies
         showLabels>
-        {this.state.data["nodes"].map((node:any, index: number)=>{
+        {this.state.data["nodes"].map((node, index)=>{
           const oNode = Object.assign({}, this._cleanNode(node));
           oNode["label"] = node["data"][LABEL_MAP[oNode["type"]]];
           //If id not casted to string, links are not visible
           oNode["id"] = oNode["data"]["id"]+"";
-          return (<ForceGraphNode key={index+oNode["type"]}
+          return (<ForceGraphNode key={index+"node"}
           node={oNode} fill={COLOR_MAP[oNode["type"]]} />)
         })}
         {this.state.data["links"].map((link, index)=>{

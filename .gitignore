@@ -14,3 +14,7 @@ buildNumber.properties
 \.settings/
 
 client/node_modules/
+
+\.classpath
+
+\.project

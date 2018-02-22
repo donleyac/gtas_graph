@@ -1,0 +1,47 @@
+{  
+    "Passenger":{  
+       "include":true,
+       "middleName":"",
+       "firstName":"",
+       "lastName":"",
+       "citizenshipCountry":"",
+       "residencyCountry":"",
+       "dob":"",
+       "mariaId":""
+    },
+    "Address":{  
+       "include":true,
+       "line1":"",
+       "city":"",
+       "state":"",
+       "postalCode":"",
+       "country":""
+    },
+    "Agency":{  
+       "include":true,
+       "name":"",
+       "country":"",
+       "identifier":"",
+       "location":"",
+       "type":"",
+       "city":""
+    },
+    "Flight":{  
+       "include":true,
+       "flightNumber":"",
+       "flightDate":"",
+       "embarkation":"",
+       "mariaId":"",
+       "debarkation":""
+    },
+    "Document":{  
+       "include":true,
+       "documentType":"",
+       "expirationDate":"",
+       "documentNumber":"",
+       "issuanceCountry":""
+    },
+    "sideBarClosed": false,
+    "freezePanels": false,
+    "openAccordion": ""
+ }  
