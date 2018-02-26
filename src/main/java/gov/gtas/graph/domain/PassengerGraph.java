@@ -45,13 +45,13 @@ public class PassengerGraph {
 			
 	@Relationship(type = "HAS_A", direction = Relationship.INCOMING)
 	private List<DocumentGraph> documents = new ArrayList<>();
-	/**
-	@Relationship(type = "LIVED_IN", direction = Relationship.OUTGOING)
+	
+	@Relationship(type = "LIVED_AT", direction = Relationship.OUTGOING)
 	private List<AddressGraph> adresses = new ArrayList<>();
 
-	@Relationship(type = "BOOKED_BY",direction = Relationship.OUTGOING)
+	@Relationship(type = "BOOKED_AT",direction = Relationship.OUTGOING)
 	private List<AgencyGraph> agencies = new ArrayList<>();
-
+	/**
 	@Relationship(type = "BOOKED_WITH",direction = Relationship.OUTGOING)
 	private List<CreditCardGraph> creditCards = new ArrayList<>();
 	**/
@@ -85,7 +85,7 @@ public class PassengerGraph {
 	public void setEmails(List<EmailGraph> emails) {
 		this.emails = emails;
 	}
-/**
+
 	public List<AgencyGraph> getAgencies() {
 		return agencies;
 	}
@@ -93,7 +93,7 @@ public class PassengerGraph {
 	public void setAgencies(List<AgencyGraph> agencies) {
 		this.agencies = agencies;
 	}
-
+	/**
 	public List<CreditCardGraph> getCreditCards() {
 		return creditCards;
 	}
@@ -111,15 +111,15 @@ public class PassengerGraph {
 //		}
 //		coTravellers.add(person);
 //	}
-	/**
-		public List<AddressGraph> getAdresses() {
+
+	public List<AddressGraph> getAdresses() {
 		return adresses;
 	}
 
 	public void setAdresses(List<AddressGraph> adresses) {
 		this.adresses = adresses;
 	}
-	**/
+
 	public Long getId() {
 		return id;
 	}

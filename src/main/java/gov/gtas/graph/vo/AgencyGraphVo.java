@@ -13,12 +13,20 @@ public class AgencyGraphVo {
     private String city;
     private String type;
     private Long mariaId;
+    private String include;
     private List<PassengerGraphVo> passengers=new ArrayList<>();
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getInclude() {
+		return include;
+	}
+	public void setInclude(String include) {
+		this.include = include;
 	}
 	public String getName() {
 		return name;

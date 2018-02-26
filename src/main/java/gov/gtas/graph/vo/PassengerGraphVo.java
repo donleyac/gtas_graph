@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class PassengerGraphVo {
 	private Long id;
+	private String include;
 	private String firstName;
     private String middleName;
     private String lastName;
@@ -20,7 +21,13 @@ public class PassengerGraphVo {
 	private  Set<PhoneGraphVo> phones=new HashSet<>();
 	private  Set<EmailGraphVo> emails=new HashSet<>();
 	
-    public Set<PhoneGraphVo> getPhones() {
+    public String getInclude() {
+		return include;
+	}
+	public void setInclude(String include) {
+		this.include = include;
+	}
+	public Set<PhoneGraphVo> getPhones() {
 		return phones;
 	}
 	public void setPhones(Set<PhoneGraphVo> phones) {

@@ -19,6 +19,7 @@ import gov.gtas.graph.services.AgencyGraphService;
 import gov.gtas.graph.services.FlightGraphService;
 import gov.gtas.graph.services.FlightPaxGraphService;
 import gov.gtas.graph.services.PassengerGraphService;
+import gov.gtas.graph.util.GraphUtil;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController("/gtas-graph")
@@ -87,6 +88,16 @@ public class FlightPassengerController {
 		
 		return agencies;
 	}
+	@RequestMapping("/searchByCriteria")
+	public Map<String, Object> searchPassengersByCriteria(@RequestParam(value = "query",required = false) String query){
 	
+		Map<String, Object> searchMap=GraphUtil.convertJsonToObjectMap(query);
+		if(searchMap != null && searchMap.containsKey("Passenger")){
+			Map<String, Object> passengers= passengerGraphService.findFilteredPassengerGraph(searchMap);
+			return passengers;
+		}
+
+		return null;
+	}
 
 }

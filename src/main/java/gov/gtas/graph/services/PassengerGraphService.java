@@ -20,6 +20,7 @@ import gov.gtas.graph.domain.PassengerGraph;
 import gov.gtas.graph.domain.PhoneGraph;
 import gov.gtas.graph.repositories.FlightGraphRepository;
 import gov.gtas.graph.repositories.PassengerGraphRepository;
+import gov.gtas.graph.vo.AddressGraphVo;
 import gov.gtas.graph.vo.AgencyGraphVo;
 import gov.gtas.graph.vo.DocumentGraphVo;
 import gov.gtas.graph.vo.EmailGraphVo;
@@ -44,6 +45,60 @@ public class PassengerGraphService {
 		return toD3Format(passengers);
 	}
 
+	@Transactional
+	public Map<String, Object> findFilteredPassengerGraph(Map<String, Object> searchMap){
+		boolean flight=false;
+		boolean agency=false;
+		boolean address=false;
+		boolean document=false;
+		
+		Collection<PassengerGraph> result = (Collection<PassengerGraph>) passengerRepository.getFilteredPassengerGraph();
+		Iterator it = searchMap.entrySet().iterator();
+	    while (it.hasNext()) {
+	        @SuppressWarnings("rawtypes")
+			Map.Entry pair = (Map.Entry)it.next();
+	        if(pair.getKey().equals("Flight")){
+	        	FlightGraphVo vo=(FlightGraphVo) pair.getValue();
+	        	if(vo.getInclude().equalsIgnoreCase("true")){
+	        		flight=true;
+	        	}
+	        }
+	        if(pair.getKey().equals("Address")){
+	        	AddressGraphVo vo=(AddressGraphVo) pair.getValue();
+	        	if(vo.getInclude().equalsIgnoreCase("true")){
+	        		address=true;
+	        	}
+	        }
+	        if(pair.getKey().equals("Agency")){
+	        	AgencyGraphVo vo=(AgencyGraphVo) pair.getValue();
+	        	if(vo.getInclude().equalsIgnoreCase("true")){
+	        		agency=true;
+	        	}
+	        }
+	        if(pair.getKey().equals("Document")){
+	        	DocumentGraphVo vo=(DocumentGraphVo) pair.getValue();
+	        	if(vo.getInclude().equalsIgnoreCase("true")){
+	        		document=true;
+	        	}
+	        }	        
+	    }
+	    for(PassengerGraph pg : result){
+	    	if(!flight){
+	    		pg.setFlights(null);
+	    	}
+	    	if(!document){
+	    		pg.setDocuments(null);
+	    	}
+	    	if(!agency){
+	    		pg.setAgencies(null);
+	    	}
+	    	if(!address){
+	    		pg.setAdresses(null);
+	    	}
+	    }
+	    List<PassengerGraphVo> passengers=mapModelObjectsToVo(result);
+		return toD3Format(passengers);
+	}
 	private Map<String, Object> toD3Format(Collection<PassengerGraphVo> passengers) {
 		
 		List<Map<String, Object>> nodes = new ArrayList<>();

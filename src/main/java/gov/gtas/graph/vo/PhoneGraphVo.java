@@ -2,12 +2,18 @@ package gov.gtas.graph.vo;
 
 import java.util.Objects;
 
-import gov.gtas.graph.domain.PassengerGraph;
 
 public class PhoneGraphVo {
 
     private Long id;  
     private String number;
+    private String include;
+	public String getInclude() {
+		return include;
+	}
+	public void setInclude(String include) {
+		this.include = include;
+	}
 	public Long getId() {
 		return id;
 	}

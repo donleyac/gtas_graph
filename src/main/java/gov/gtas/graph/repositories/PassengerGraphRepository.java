@@ -35,4 +35,7 @@ public interface PassengerGraphRepository extends GraphRepository<PassengerGraph
 	//@Query("START n=node(*) MATCH (n:Passenger)-[r]->(m) RETURN n,r,m LIMIT {limit}")
 	@Query("START n=node(*) MATCH (n:Passenger)<-[r]-(m) RETURN n,r,m LIMIT {limit}")
 	Collection<PassengerGraph> getFullPassengerGraph(@Param("limit") int limit);
+	
+	@Query("START n=node(*) MATCH (n:Passenger)<-[r]->(m) RETURN n,r,m")
+	Collection<PassengerGraph> getFilteredPassengerGraph();
 }
