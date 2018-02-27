@@ -1,6 +1,5 @@
 {  
     "Passenger":{  
-       "include":true,
        "middleName":"",
        "firstName":"",
        "lastName":"",
@@ -10,7 +9,6 @@
        "mariaId":""
     },
     "Address":{  
-       "include":true,
        "line1":"",
        "city":"",
        "state":"",
@@ -18,7 +16,6 @@
        "country":""
     },
     "Agency":{  
-       "include":true,
        "name":"",
        "country":"",
        "identifier":"",
@@ -27,7 +24,6 @@
        "city":""
     },
     "Flight":{  
-       "include":true,
        "flightNumber":"",
        "flightDate":"",
        "embarkation":"",
@@ -35,7 +31,6 @@
        "debarkation":""
     },
     "Document":{  
-       "include":true,
        "documentType":"",
        "expirationDate":"",
        "documentNumber":"",

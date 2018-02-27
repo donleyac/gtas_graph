@@ -13,29 +13,36 @@ export class Sidepanel extends Component {
     this.handleSidebarBtn = this.handleSidebarBtn.bind(this);
     this._resetState = this._resetState.bind(this);
     this._handleOpen = this._handleOpen.bind(this);
-    this._clearAccordion = this._clearAccordion.bind(this);
   }
-  handleChange(key, event){
+  handleChange(panelNm, event){
     const target = event.target;
-    const value = target.type==='checkbox'?target.checked:target.value;
-    const name = target.name;
-    let panel = this.state[key];
-    panel[name] = value;
-
-    this.setState({
-      [key]: panel
-    });
     if(target.type==='checkbox'){
-      if(!target.checked) {
-        this._clearAccordion(key);
+      let include = target.checked;
+      if(!include) {
+        //Remove key from filter criteria
+        delete this.state[panelNm];
+        this.setState(this.state);
+        this.setState({freezePanels: false});
         //Reset open when active unchecked
-        if(this.state.openAccordion===key){
+        if(this.state.openAccordion===panelNm){
           this._handleOpen("");
         }
       }
+      else {
+        this.setState({
+          [panelNm]: deepCopy(intialState[panelNm])
+        });
+      }
     }
     else {
-      //If filtering freeze, only allowed to filter on one type
+      let name = target.name;
+      let value = target.value;
+
+      let panelVal = this.state[panelNm];
+      panelVal[name] = value;
+
+      //Set Val and freeze, only filter one at a time
+      this.setState({[panelNm]: panelVal});
       this.setState({freezePanels: true});
     }
   }
@@ -46,14 +53,6 @@ export class Sidepanel extends Component {
   }
   _resetState(){
     this.setState(deepCopy(intialState));
-  }
-  _clearAccordion(title){
-    //Preserve include for reset on uninclude
-    let includeVal = this.state[title].include;
-    let copy = deepCopy(intialState[title]);
-    copy.include = includeVal;
-    this.setState({freezePanels: false});
-    this.setState({[title]: copy});
   }
   _handleOpen(title){
     if(!this.state.freezePanels) {
@@ -74,7 +73,8 @@ export class Sidepanel extends Component {
           <form className="filters">
             <div className="filter-list" role="tablist">
               <h1 className="filter-heading">Filters
-                <button onClick={()=>this.props.handleSubmit(this.state)} type="button" className="margin-side-sm btn btn-icon-only btn-primary">
+                <button onClick={()=>this.props.handleSubmit(this.state)} 
+                  type="button" className="margin-side-sm btn btn-icon-only btn-primary">
                   <i className="fa fa-inverse fa-search"></i>
                   <span className="sr-only">Search</span>
                 </button>

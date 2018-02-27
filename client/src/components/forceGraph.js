@@ -1,26 +1,14 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import { InteractiveForceGraph, ForceGraphNode, ForceGraphArrowLink} from 'react-vis-force';
 import {Tooltip} from 'react-bootstrap';
 import './forceGraph.scss';
-
 export default class ForceGraphImpl extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      tooltip: "",
-      data:{}
+      tooltip: ""
     };
   }
-  componentWillMount(){
-    axios.get('http://localhost:8080/gtas-graph/passengers')
-    .then(res => {
-      console.log(res.data);
-      this.setState({data: res.data});
-    })
-    .catch(err=>console.log(err));
-  }
-
   //Needed to remove complex object clutter from node
   _cleanNode(node){
     const removeList = ["passengers", "flights", "documents", "phones", "emails"];
@@ -55,7 +43,7 @@ export default class ForceGraphImpl extends Component{
     };
   return(
     <span className="flex justify-content-center full-width">
-      {this.state.data["nodes"] && this.state.data["links"]
+      {this.props.data["nodes"] && this.props.data["links"]
       ?<InteractiveForceGraph
         simulationOptions={{ height: 500, width: 700 }}
         labelAttr="label"
@@ -64,7 +52,7 @@ export default class ForceGraphImpl extends Component{
         zoom
         highlightDependencies
         showLabels>
-        {this.state.data["nodes"].map((node, index)=>{
+        {this.props.data["nodes"].map((node, index)=>{
           const oNode = Object.assign({}, this._cleanNode(node));
           oNode["label"] = node["data"][LABEL_MAP[oNode["type"]]];
           //If id not casted to string, links are not visible
@@ -72,7 +60,7 @@ export default class ForceGraphImpl extends Component{
           return (<ForceGraphNode key={index+"node"}
           node={oNode} fill={COLOR_MAP[oNode["type"]]} />)
         })}
-        {this.state.data["links"].map((link, index)=>{
+        {this.props.data["links"].map((link, index)=>{
           let oLink = {};
           //If source/target not casted to string, highlightDependencies doesn't work
           oLink["source"] = link["source"]+"";
