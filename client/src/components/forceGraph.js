@@ -45,7 +45,7 @@ export default class ForceGraphImpl extends Component{
     <span className="flex justify-content-center full-width">
       {this.props.data["nodes"] && this.props.data["links"]
       ?<InteractiveForceGraph
-        simulationOptions={{ height: 500, width: 700 }}
+        simulationOptions={{ height: this.props.dimensions[0], width: this.props.dimensions[1] }}
         labelAttr="label"
         onSelectNode={(event, node) => this.setState({tooltip:JSON.stringify(node["data"], null, 2)})}
         onDeselectNode={(event, node)=> this.setState({tooltip:""})}

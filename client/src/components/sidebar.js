@@ -22,10 +22,9 @@ export class Sidepanel extends Component {
         //Remove key from filter criteria
         delete this.state[panelNm];
         this.setState(this.state);
-        this.setState({freezePanels: false});
         //Reset open when active unchecked
         if(this.state.openAccordion===panelNm){
-          this._handleOpen("");
+          this.setState({freezePanels: false}, ()=> this._handleOpen(panelNm));
         }
       }
       else {
