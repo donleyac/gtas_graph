@@ -8,7 +8,35 @@ public class DocumentGraphVo {
 	private String expirationDate;
 	private String issuanceCountry;
 	private String include;
+	private String includeFlight;
+	private String includeAgency;
+	private String includeAddress;
+	private String includePhone;
 	
+	public String getIncludeFlight() {
+		return includeFlight;
+	}
+	public void setIncludeFlight(String includeFlight) {
+		this.includeFlight = includeFlight;
+	}
+	public String getIncludeAgency() {
+		return includeAgency;
+	}
+	public void setIncludeAgency(String includeAgency) {
+		this.includeAgency = includeAgency;
+	}
+	public String getIncludeAddress() {
+		return includeAddress;
+	}
+	public void setIncludeAddress(String includeAddress) {
+		this.includeAddress = includeAddress;
+	}
+	public String getIncludePhone() {
+		return includePhone;
+	}
+	public void setIncludePhone(String includePhone) {
+		this.includePhone = includePhone;
+	}
 	public String getInclude() {
 		return include;
 	}

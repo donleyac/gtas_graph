@@ -11,6 +11,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import gov.gtas.graph.domain.AgencyGraph;
 import gov.gtas.graph.domain.DocumentGraph;
@@ -25,6 +26,7 @@ import gov.gtas.graph.vo.AgencyGraphVo;
 import gov.gtas.graph.vo.DocumentGraphVo;
 import gov.gtas.graph.vo.EmailGraphVo;
 import gov.gtas.graph.vo.FlightGraphVo;
+import gov.gtas.graph.vo.PassengerFilterVo;
 import gov.gtas.graph.vo.PassengerGraphVo;
 import gov.gtas.graph.vo.PhoneGraphVo;
 import gov.gtas.rdbms.domain.Passenger;
@@ -44,7 +46,16 @@ public class PassengerGraphService {
 		List<PassengerGraphVo> passengers=mapModelObjectsToVo(result);
 		return toD3Format(passengers);
 	}
-
+	
+	public Map<String, Object> getFilteredPassengerGraph(PassengerFilterVo passenger) {
+		return null;
+	}
+	public Map<String, Object> getNoFilteredPassengerGraph() {
+		Collection<PassengerGraph> result = (Collection<PassengerGraph>) passengerRepository.getFilteredPassengerGraph();
+		List<PassengerGraphVo> passengers=mapModelObjectsToVo(result);
+		return toD3Format(passengers);
+	}
+	
 	@Transactional
 	public Map<String, Object> findFilteredPassengerGraph(Map<String, Object> searchMap){
 		boolean flight=false;
@@ -99,6 +110,7 @@ public class PassengerGraphService {
 	    List<PassengerGraphVo> passengers=mapModelObjectsToVo(result);
 		return toD3Format(passengers);
 	}
+	
 	private Map<String, Object> toD3Format(Collection<PassengerGraphVo> passengers) {
 		
 		List<Map<String, Object>> nodes = new ArrayList<>();
