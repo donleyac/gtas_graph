@@ -12,6 +12,7 @@ public class FlightFilterVo {
     private String embarkCountry;
     private String debarkCountry;
     private Long mariaId;
+    
 	public boolean isAddress() {
 		return address;
 	}

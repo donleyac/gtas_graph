@@ -155,7 +155,6 @@ public class FlightPassengerController {
 	@RequestMapping(value = "/allPassengerdata", method = RequestMethod.POST, 
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	 public Map<String, Object> getNoFilteredPassengerGraph(@RequestBody NoFilterVo nvo) {
-		System.out.println(" NVO ########## "+nvo.isAgency());
 		Map<String, Object> passengers= passengerGraphService.findFullPassengerGraph(300);
 	    return passengers;
 

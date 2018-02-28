@@ -10,6 +10,14 @@ public class AddressFilterVo {
     private String state;
     private String postalCode;
     private String country;
+    private Long mariaId;
+    
+	public Long getMariaId() {
+		return mariaId;
+	}
+	public void setMariaId(Long mariaId) {
+		this.mariaId = mariaId;
+	}
 	public boolean isFlight() {
 		return flight;
 	}

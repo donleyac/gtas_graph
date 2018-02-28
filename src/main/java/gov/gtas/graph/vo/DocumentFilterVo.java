@@ -9,6 +9,14 @@ public class DocumentFilterVo {
 	private String documentNumber;
 	private String expirationDate;
 	private String issuanceCountry;
+	private Long mariaId;
+	    
+	public Long getMariaId() {
+		return mariaId;
+	}
+	public void setMariaId(Long mariaId) {
+		this.mariaId = mariaId;
+	}
 	public boolean isAddress() {
 		return address;
 	}

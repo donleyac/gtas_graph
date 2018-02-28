@@ -51,7 +51,22 @@ public class PassengerGraphService {
 	
 
 	public Map<String, Object> getFilteredPassengerGraph(PassengerFilterVo passenger) {
-		Collection<PassengerGraph> result = (Collection<PassengerGraph>) passengerRepository.getFilteredPassengerGraph();
+		Collection<PassengerGraph> result=new ArrayList<>();
+		if(passenger.getMariaId() != null ){
+			PassengerGraph pg= passengerRepository.findByMariaId(passenger.getMariaId());
+			result.add(pg);
+		}
+		else if(StringUtils.isNotBlank(passenger.getFirstName())){
+			PassengerGraph pg= passengerRepository.findByFirstName(passenger.getFirstName());
+			result.add(pg);
+		}
+		else if(StringUtils.isNotBlank(passenger.getLastName())){
+			PassengerGraph pg= passengerRepository.findByLastName(passenger.getLastName());
+			result.add(pg);
+		}
+		else{
+			result = (Collection<PassengerGraph>) passengerRepository.getFilteredPassengerGraph();			
+		}
 		getFlteredPassengerList(result,passenger);
 		List<PassengerGraphVo> passengers=mapModelObjectsToVo(result);
 		return toD3Format(passengers);
@@ -259,16 +274,7 @@ public class PassengerGraphService {
 			if(passenger.isFlight() == false){
 				p.setFlights(new ArrayList<FlightGraph>());
 			}
-			if(StringUtils.isNotBlank(passenger.getFirstName()) && passenger.getFirstName().equalsIgnoreCase(p.getFirstName())){
-				filterList.add(p);
-			}
-			else if(StringUtils.isNotBlank(passenger.getLastName()) && passenger.getLastName().equalsIgnoreCase(p.getLastName())) {
-				filterList.add(p);
-			}
-			else if(StringUtils.isNotBlank(passenger.getGender()) && passenger.getGender().equalsIgnoreCase(p.getGender())) {
-				filterList.add(p);
-			}
-			else if(StringUtils.isNotBlank(passenger.getDob()) && passenger.getDob().equalsIgnoreCase(p.getDob())) {
+			if(StringUtils.isNotBlank(passenger.getGender()) && passenger.getGender().equalsIgnoreCase(p.getGender())) {
 				filterList.add(p);
 			}
 			else{
