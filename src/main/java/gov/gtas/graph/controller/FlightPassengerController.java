@@ -146,9 +146,9 @@ public class FlightPassengerController {
 	
 	@RequestMapping(value = "/passengerFilter", method = RequestMethod.POST, 
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	 public Map<String, Object> getFilteredPassengerGraph(@RequestBody PassengerFilterVo doc) {
-		
-	     return null;
+	 public Map<String, Object> getFilteredPassengerGraph(@RequestBody PassengerFilterVo vo) {
+		Map<String, Object> passengers= passengerGraphService.getFilteredPassengerGraph(vo);
+	    return passengers;
 
 	 }
 	

@@ -1,10 +1,10 @@
 package gov.gtas.graph.vo;
 
 public class PassengerFilterVo {
-	private boolean address;
-	private boolean agency;
-	private boolean flight;
-	private boolean document;
+	private boolean address=true;
+	private boolean agency=true;
+	private boolean flight=true;
+	private boolean document=true;
 	private String firstName;
     private String middleName;
     private String lastName;

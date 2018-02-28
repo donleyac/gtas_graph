@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import gov.gtas.graph.domain.AddressGraph;
 import gov.gtas.graph.domain.AgencyGraph;
 import gov.gtas.graph.domain.DocumentGraph;
 import gov.gtas.graph.domain.EmailGraph;
@@ -47,8 +49,13 @@ public class PassengerGraphService {
 		return toD3Format(passengers);
 	}
 	
+
 	public Map<String, Object> getFilteredPassengerGraph(PassengerFilterVo passenger) {
-		return null;
+		Collection<PassengerGraph> result = (Collection<PassengerGraph>) passengerRepository.getFilteredPassengerGraph();
+		getFlteredPassengerList(result,passenger);
+		List<PassengerGraphVo> passengers=mapModelObjectsToVo(result);
+		return toD3Format(passengers);
+
 	}
 	public Map<String, Object> getNoFilteredPassengerGraph() {
 		Collection<PassengerGraph> result = (Collection<PassengerGraph>) passengerRepository.getFilteredPassengerGraph();
@@ -56,6 +63,7 @@ public class PassengerGraphService {
 		return toD3Format(passengers);
 	}
 	
+
 	@Transactional
 	public Map<String, Object> findFilteredPassengerGraph(Map<String, Object> searchMap){
 		boolean flight=false;
@@ -95,16 +103,16 @@ public class PassengerGraphService {
 	    }
 	    for(PassengerGraph pg : result){
 	    	if(!flight){
-	    		pg.setFlights(null);
+	    		pg.setFlights(new ArrayList());
 	    	}
 	    	if(!document){
-	    		pg.setDocuments(null);
+	    		pg.setDocuments(new ArrayList());
 	    	}
 	    	if(!agency){
-	    		pg.setAgencies(null);
+	    		pg.setAgencies(new ArrayList());
 	    	}
 	    	if(!address){
-	    		pg.setAdresses(null);
+	    		pg.setAdresses(new ArrayList());
 	    	}
 	    }
 	    List<PassengerGraphVo> passengers=mapModelObjectsToVo(result);
@@ -235,5 +243,39 @@ public class PassengerGraphService {
 			mList.add(pvo);
 		}
 		return mList;
+	}
+	private ArrayList<PassengerGraph> getFlteredPassengerList(Collection<PassengerGraph> result,PassengerFilterVo passenger){
+		ArrayList<PassengerGraph> filterList=new ArrayList<>();
+		for(PassengerGraph p: result){
+			if(passenger.isAddress() == false ){
+				p.setAdresses(new ArrayList<AddressGraph>());
+			}
+			if(passenger.isAgency() == false){
+				p.setAgencies(new ArrayList<AgencyGraph>());
+			}
+			if(passenger.isDocument() == false){
+				p.setDocuments(new ArrayList<DocumentGraph>());
+			}
+			if(passenger.isFlight() == false){
+				p.setFlights(new ArrayList<FlightGraph>());
+			}
+			if(StringUtils.isNotBlank(passenger.getFirstName()) && passenger.getFirstName().equalsIgnoreCase(p.getFirstName())){
+				filterList.add(p);
+			}
+			else if(StringUtils.isNotBlank(passenger.getLastName()) && passenger.getLastName().equalsIgnoreCase(p.getLastName())) {
+				filterList.add(p);
+			}
+			else if(StringUtils.isNotBlank(passenger.getGender()) && passenger.getGender().equalsIgnoreCase(p.getGender())) {
+				filterList.add(p);
+			}
+			else if(StringUtils.isNotBlank(passenger.getDob()) && passenger.getDob().equalsIgnoreCase(p.getDob())) {
+				filterList.add(p);
+			}
+			else{
+				filterList.add(p);
+			}
+		
+		}
+		return filterList;
 	}
 }
