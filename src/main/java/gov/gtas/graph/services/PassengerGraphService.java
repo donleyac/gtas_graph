@@ -67,7 +67,7 @@ public class PassengerGraphService {
 		else{
 			result = (Collection<PassengerGraph>) passengerRepository.getFilteredPassengerGraph();			
 		}
-		getFlteredPassengerList(result,passenger);
+		result=getFlteredPassengerList(result,passenger);
 		List<PassengerGraphVo> passengers=mapModelObjectsToVo(result);
 		return toD3Format(passengers);
 

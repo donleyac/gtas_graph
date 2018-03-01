@@ -44,8 +44,8 @@ public class FlightGraph {
     	
     }
     
-	//@Relationship(type = "FLEW_ON", direction = Relationship.INCOMING)
-	//private Set<PassengerGraph> passengers = new HashSet<>();
+	@Relationship(type = "FLEW_ON", direction = Relationship.OUTGOING)
+	private List<PassengerGraph> passengers = new ArrayList<>();
 
 
 	public Long getId() {
@@ -120,19 +120,19 @@ public class FlightGraph {
 	}
 	public void addFlightPax(FlightPax pax) {
 		this.addFlightPax(pax);
-	}
-	public Set<PassengerGraph> getPassengers() {
+	}**/
+	public List<PassengerGraph> getPassengers() {
 		return passengers;
 	}
-	public void setPassengers(Set<PassengerGraph> passengers) {
+	public void setPassengers(List<PassengerGraph> passengers) {
 		this.passengers = passengers;
 	}  
-
+	  /**
 	@Override
     public int hashCode() {
        return Objects.hash(this.flightNumber, this.flightDate, this.embarkation, this.debarkation);
     }
-    
+  
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

@@ -60,10 +60,10 @@ public class FlightPassengerController {
 		return service.graph(limit == null ? 5 : limit);
 	}
 
-	@RequestMapping("/searchFlight")
-	public Map<String,Object> findByFlightNumber(@Param("flightNumber") String flightNumber){
-		return flightGraphService.findByFlightNumber(flightNumber);
-	}
+	//@RequestMapping("/searchFlight")
+	//public Map<String,Object> findByFlightNumber(@Param("flightNumber") String flightNumber){
+		//return flightGraphService.findByFlightNumber(flightNumber);
+	//}
 
 	@RequestMapping("/search")
 	public Collection<PassengerGraph> searchDocumentByCriteria(@Param("documentNumber") String number){
@@ -138,9 +138,9 @@ public class FlightPassengerController {
 	
 	@RequestMapping(value = "/flightFilter", method = RequestMethod.POST, 
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	 public Map<String, Object> getFilteredFlightGraph(@RequestBody FlightFilterVo doc) {
+	 public Map<String, Object> getFilteredFlightGraph(@RequestBody FlightFilterVo fvo) {
 		
-	     return null;
+	     return flightGraphService.getFlteredFlightGraph(fvo);
 
 	 }
 	

@@ -1,5 +1,10 @@
 package gov.gtas.graph.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import gov.gtas.graph.domain.PassengerGraph;
+
 public class FlightGraphVo {
 	private Long id;
     private String flightNumber;
@@ -10,6 +15,14 @@ public class FlightGraphVo {
     private String debarkCountry;
     private Long mariaId;
     private String include;
+	private List<PassengerGraphVo> passengers = new ArrayList<>();
+	
+	public List<PassengerGraphVo> getPassengers() {
+		return passengers;
+	}
+	public void setPassengers(List<PassengerGraphVo> passengers) {
+		this.passengers = passengers;
+	}
 	public String getInclude() {
 		return include;
 	}
