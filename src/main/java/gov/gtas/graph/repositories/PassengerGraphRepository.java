@@ -33,7 +33,8 @@ public interface PassengerGraphRepository extends GraphRepository<PassengerGraph
 	Collection<PassengerGraph> getPassengersByDocumentNumber(@Param("documentNumber") String number);
 	
 	//@Query("START n=node(*) MATCH (n:Passenger)-[r]->(m) RETURN n,r,m LIMIT {limit}")
-	@Query("START n=node(*) MATCH (n:Passenger)<-[r]-(m) RETURN n,r,m LIMIT {limit}")
+	//@Query("START n=node(*) MATCH (n:Passenger)<-[r]-(m) RETURN n,r,m LIMIT {limit}")
+	@Query("START n=node(*) MATCH (n:Passenger)<-[r]->(m) RETURN n,r,m")
 	Collection<PassengerGraph> getFullPassengerGraph(@Param("limit") int limit);
 	
 	@Query("START n=node(*) MATCH (n:Passenger)<-[r]->(m) RETURN n,r,m")
